@@ -1,0 +1,503 @@
+﻿@using Flurl.Http;
+@using ShikkhanobishBlazor.Models
+@page "/Count"
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Responsive bootstrap 4 admin template" name="description" />
+    <meta content="Coderthemes" name="author"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+
+</head>
+
+<body>
+
+    <!-- Begin page -->
+    <div id="wrapper">
+
+        <!-- Topbar Start -->
+        <div class="navbar-custom">
+            <ul class="list-unstyled topnav-menu float-right mb-0">
+                <li class="dropdown notification-list">
+                    <a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                        <img src="/images/images.png" alt="user-image" class="rounded-circle" />
+                        <span class="pro-user-name ml-1"> Maxine K <i class="mdi mdi-chevron-down"></i> </span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right profile-dropdown">
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <i class="mdi mdi-logout-variant"></i>
+                            <span>Logout</span>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+
+            <!-- LOGO -->
+            <div class="logo-box">
+                <a href="Index" class="logo text-center logo-dark">
+                    <span class="logo-lg">
+                        <img src="/images/logo1.png" alt="" height="50" />
+                    </span>
+
+                    <span class="logo-sm">
+                        <img src="/images/logo1.png" alt="" height="22" />
+                    </span>
+                </a>
+
+                <a href="Index" class="logo text-center logo-light">
+                    <span class="logo-lg">
+                        <img src="/images/logo1.png" alt="" height="50" />
+                    </span>
+                    <span class="logo-sm">
+                        <img src="/images/logo1.png" alt="" height="22" />
+                    </span>
+                </a>
+            </div>
+
+            <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
+                <li>
+                    <button class="button-menu-mobile">
+                        <i class="mdi mdi-menu"></i>
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <!-- end Topbar -->
+        <!-- Left Sidebar Start  -->
+        <div class="left-side-menu">
+            <div class="user-box">
+                <div class="float-left">
+                    <img src="/images/images.png" alt="" class="avatar-md rounded-circle" />
+                </div>
+                <div class="user-info">
+                    <a href="#">Maxine K</a>
+                </div>
+            </div>
+
+            <!--- Sidemenu -->
+            <div id="sidebar-menu">
+                <ul class="metismenu" id="side-menu">
+                    <li class="menu-title">Navigation</li>
+
+                    <li>
+                        <a href="">
+                            <i class="fas fa-home"></i>
+                            <span> Dashboard </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Count">
+                            <i class="fas fa-calculator"></i>
+                            <span> Count </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Student">
+                            <i class="fas fa-user-graduate"></i>
+                            <span> Student </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="Teacher">
+                            <i class="fas fa-user"></i>
+                            <span> Teacher </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="Voucher">
+                            <i class="fas fa-fill-drip"></i>
+                            <span> Voucher </span>
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="Add">
+                            <i class="fas fa-plus-square"></i>
+                            <span> Add </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- End Sidebar -->
+
+            <div class="clearfix"></div>
+        </div>
+        <!-- Left Sidebar End -->
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+
+        <div class="content-page">
+            <div class="content">
+
+                <!-- Start container-fluid -->
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div>
+                                <div class="card-box widget-inline">
+                                    <div class="row">
+                                        <div class="col-xl-3 col-sm-6 widget-inline-box">
+                                            <div class="text-center p-3">
+                                                
+                                                <h2 class="mt-2"><i class="fas fa-lira-sign text-success mr-2"></i> <b>@countTotalEarn</b></h2>
+                                                <p class="text-muted mb-0">Total Income</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-3 col-sm-6 widget-inline-box">
+                                            <div class="text-center p-3">
+                                                <h2 class="mt-2"><i class="fas fa-user-graduate text-teal mr-2"></i> <b>@countStudent</b></h2>
+                                                <p class="text-muted mb-0">Total Student</p>
+
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-3 col-sm-6 widget-inline-box">
+                                            <div class="text-center p-3">
+                                                <h2 class="mt-2"> <i class="fas fa-user text-info mr-2"></i><b>@countTeacher</b></h2>
+                                                <p class="text-muted mb-0">Total Teacher</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-3 col-sm-6">
+                                            <div class="text-center p-3">
+                                                <h2 class="mt-2"><i class="fas fa-equals text-primary mr-2"></i><b>@countTuition</b></h2>
+                                                <p class="text-muted mb-0">Total Tuition</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end row -->
+
+                    <br />
+                    <div class="row">
+                        <div class="col-12">
+                            <div>
+                                <div class="card-box widget-inline studentCard">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-6 col-md-4 widget-inline-box">
+                                            <div class="text-center p-3">
+                                                <h2 class="mt-2"><i class="fas fa-user-graduate text-teal mr-2"></i><b>@countClassEightTuition</b></h2>
+                                                <p class="text-muted mb-0">Number Of Tuitions In Class 8</p>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-12 col-sm-6 col-md-4 widget-inline-box">
+                                            <div class="text-center p-3">
+                                                <h2 class="mt-2"><i class="fas fa-user-graduate text-teal mr-2"></i><b>@countClass9and10Tution</b></h2>
+                                                <p class="text-muted mb-0">Number Of Tuitions In Class 9&10</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-sm-6 col-md-4 ">
+                                            <div class="text-center p-3">
+                                                <h2 class="mt-2"><i class="fas fa-user-graduate text-teal mr-2"></i><b>@countClass11and12Tution</b></h2>
+                                                <p class="text-muted mb-0">Number Of Tuitions In Class 11&12</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end row -->
+
+                    <br />
+                    <div class="row">
+                        <div class="col-12">
+                            <div>
+                                <div class="card-box widget-inline">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-6 col-md-4 widget-inline-box">
+                                            <div class="text-center p-3">
+                                                <h2 class="mt-2"> <i class="fas fa-user text-info mr-2"></i><b>@countScienceNineAndTen</b></h2>
+                                                <p class="text-muted mb-0">
+                                                    No Of
+                                                    Teachers For
+                                                    Science of 9 & 10
+                                                </p>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-12 col-sm-6 col-md-4 widget-inline-box">
+                                            <div class="text-center p-3">
+                                                <h2 class="mt-2"> <i class="fas fa-user text-info mr-2"></i><b>@countCommerceNineAndTen</b></h2>
+                                                <p class="text-muted mb-0">
+                                                    No Of
+                                                    Teachers For
+                                                    Commerce of 9 & 10
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-sm-6 col-md-4">
+                                            <div class="text-center p-3">
+                                                <h2 class="mt-2"> <i class="fas fa-user text-info mr-2"></i><b>@countArtsNineAndTen</b></h2>
+                                                <p class="text-muted mb-0">
+                                                    No Of
+                                                    Teachers For
+                                                    Arts of 9 & 10
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6 col-md-4 widget-inline-box">
+                                            <div class="text-center p-3">
+                                                <h2 class="mt-2"> <i class="fas fa-user text-info mr-2"></i><b>@countScienceElevenAndTwelve</b></h2>
+                                                <p class="text-muted mb-0">
+                                                    No Of
+                                                    Teachers For
+                                                    Science of 11 & 12
+                                                </p>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-12 col-sm-6 col-md-4 widget-inline-box">
+                                            <div class="text-center p-3">
+                                                <h2 class="mt-2"> <i class="fas fa-user text-info mr-2"></i><b>@countCommerceElevenAndTwelve</b></h2>
+                                                <p class="text-muted mb-0">
+                                                    No Of
+                                                    Teachers For
+                                                    Commerce of 11 & 12
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-sm-6 col-md-4">
+                                            <div class="text-center p-3">
+                                                <h2 class="mt-2"> <i class="fas fa-user text-info mr-2"></i><b>@countArtsElevenAndTwelve</b></h2>
+                                                <p class="text-muted mb-0">
+                                                    No Of
+                                                    Teachers For
+                                                    Arts of 11 & 12
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end row -->
+
+
+                </div>
+                <!-- end container-fluid -->
+                <!-- Footer Start -->
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                2021 &copy; shikkhanobish
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+                <!-- end Footer -->
+            </div>
+            <!-- end content -->
+
+        </div>
+        <!-- END content-page -->
+
+    </div>
+    <!-- END wrapper -->
+    <!-- Vendor js -->
+</body>
+</html>
+
+
+@code{
+
+    int countStudent;
+    int countTeacher;
+    int countTuition;
+    double countTotalEarn;
+
+    int countClassEightTuition;
+    int countClass9and10Tution;
+    int countClass11and12Tution;
+
+    int countScienceNineAndTen;
+    int countCommerceNineAndTen;
+    int countArtsNineAndTen;
+    int countScienceElevenAndTwelve;
+    int countCommerceElevenAndTwelve;
+    int countArtsElevenAndTwelve;
+
+
+
+    List<StudentTuitionHistory> sthLList;
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        sthLList = new List<StudentTuitionHistory>();
+        await GetStudentCount();
+        await GetTeacherCount();
+        await GetTuitionCount();
+        await GetTutionCountClasses();
+        await GetTotalEarn();
+        await GetTeacherByGroup();
+    }
+
+
+    public async Task<int> GetStudentCount()
+    {
+        var studentList = await "https://api.shikkhanobish.com/api/ShikkhanobishLogin/getStudent".GetJsonAsync<List<Student>>();
+        countStudent = studentList.Count();
+
+        return countStudent;
+    }
+
+
+    public async Task<int> GetTeacherCount()
+    {
+        var teacherList = await "https://api.shikkhanobish.com/api/ShikkhanobishTeacher/getAllTeacher".PostJsonAsync(new { }).ReceiveJson<List<Teacher>>();
+        countTeacher = teacherList.Count();
+        return countTeacher;
+
+    }
+
+    public async Task<int> GetTuitionCount()
+    {
+
+        sthLList = await "https://api.shikkhanobish.com/api/ShikkhanobishLogin/getStudentTuitionHistory".PostJsonAsync(new { }).ReceiveJson<List<StudentTuitionHistory>>();
+        countTuition = sthLList.Count();
+        return countTuition;
+    }
+
+    public async Task GetTutionCountClasses()
+    {
+        int eightTuition = 0;
+        int nineTenTuiton = 0;
+        int elevenTwelveTution = 0;
+        for(int i = 0; i < sthLList.Count; i++)
+        {
+            if(sthLList[i].secondChoiceID == "103")
+            {
+                eightTuition++;
+            }
+            if (sthLList[i].secondChoiceID == "101")
+            {
+                nineTenTuiton++;
+            }
+            if (sthLList[i].secondChoiceID == "102")
+            {
+                elevenTwelveTution++;
+            }
+        }
+        countClassEightTuition = eightTuition;
+        countClass9and10Tution = nineTenTuiton;
+        countClass11and12Tution = elevenTwelveTution;
+    }
+
+    public async Task GetTotalEarn()
+    {
+        double totalEarn = 0;
+
+        var totalPayList = await "https://api.shikkhanobish.com/api/ShikkhanobishLogin/getStudentTuitionHistory".GetJsonAsync<List<StudentTuitionHistory>>();
+        for(int i = 0; i< totalPayList.Count; i++)
+        {
+            totalEarn += (double)totalPayList[i].cost - totalPayList[i].teacherEarn;
+        }
+        countTotalEarn = totalEarn;
+    }
+
+    public async Task GetTeacherByGroup()
+    {
+        int totalScience = 0;
+        int totalCommerce = 0;
+        int totalArts = 0;
+
+        var teacherInfoList = await "https://api.shikkhanobish.com/api/ShikkhanobishTeacher/getAllCousrList".PostJsonAsync(new { }).ReceiveJson<List<CousrList>>();
+        var groupInfoList = await "https://api.shikkhanobish.com/api/ShikkhanobishLogin/getSubject".GetJsonAsync<List<Subject>>();
+
+
+        for (int i = 0; i < teacherInfoList.Count; i++)
+        {
+
+            for (int j = 0; j < groupInfoList.Count; j++)
+            {
+                if (teacherInfoList[i].sub1 == groupInfoList[j].subjectID)
+                {
+                    if (groupInfoList[j].groupName == "Science")
+                    {
+                        totalScience++;
+                        break;
+                    }
+                    else if (groupInfoList[j].groupName == "Commerce")
+                    {
+                        totalCommerce++;
+                        break;
+                    }
+                    else if (groupInfoList[j].groupName == "Arts")
+                    {
+                        totalArts++;
+                        break;
+                    }
+                }
+            }
+            countScienceNineAndTen = totalScience;
+            countCommerceNineAndTen = totalCommerce;
+            countArtsNineAndTen = totalArts;
+
+        }
+
+        for (int i = 0; i < teacherInfoList.Count; i++)
+        {
+
+            for (int j = 0; j < groupInfoList.Count; j++)
+            {
+                if (teacherInfoList[i].sub4 == groupInfoList[j].subjectID)
+                {
+                    if (groupInfoList[j].groupName == "Science")
+                    {
+                        totalScience++;
+                        break;
+                    }
+                    else if (groupInfoList[j].groupName == "Commerce")
+                    {
+                        totalCommerce++;
+                        break;
+                    }
+                    else if (groupInfoList[j].groupName == "Arts")
+                    {
+                        totalArts++;
+                        break;
+                    }
+                }
+            }
+
+        }
+
+        countScienceElevenAndTwelve = totalScience;
+        countCommerceElevenAndTwelve = totalCommerce;
+        countArtsElevenAndTwelve = totalArts;
+
+    }
+
+
+
+    }

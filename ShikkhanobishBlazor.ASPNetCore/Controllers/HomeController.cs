@@ -8,7 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using flur
+
 
 namespace ShikkhanobishBlazor.ASPNetCore.Controllers
 {
@@ -47,32 +47,29 @@ namespace ShikkhanobishBlazor.ASPNetCore.Controllers
         //    return Json(new { data = studentList });
         //}
 
-        public async Task <List<Student>> Student()
-        {
-            var studentList = new List<Student>();
-            studentList = "https://api.shikkhanobish.com/api/ShikkhanobishLogin/getStudent".getJsonAsync<List<Student>>();
+        //public async Task <List<Student>> Student()
+        //{
+        //    var studentList = new List<Student>();
+        //    //studentList = "https://api.shikkhanobish.com/api/ShikkhanobishLogin/getStudent".getJsonAsync<List<Student>>();
 
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("https://api.shikkhanobish.com/api/ShikkhanobishLogin/getStudent");
-                client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                var response = await client.GetAsync("/api/ShikkhanobishLogin/getStudent");
+        //    using (var client = new HttpClient())
+        //    {
+        //        client.BaseAddress = new Uri("https://api.shikkhanobish.com/api/ShikkhanobishLogin/getStudent");
+        //        client.DefaultRequestHeaders.Clear();
+        //        client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+        //        var response = await client.GetAsync("/api/ShikkhanobishLogin/getStudent");
 
-                if (response.IsSuccessStatusCode)
-                {
-                    var readTask = response.Content.ReadAsStringAsync().Result;
-                    studentList = JsonConvert.DeserializeObject<List<Student>>(readTask);
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            var readTask = response.Content.ReadAsStringAsync().Result;
+        //            studentList = JsonConvert.DeserializeObject<List<Student>>(readTask);
 
-                    return studentList;
-                }
-            }
-            return Json(new { data = response });
-        }
-        public IActionResult Teacher()
-        {
-            return View();
-        }
+        //            return studentList;
+        //        }
+        //    }
+        //    //return Json(new { data = response });
+        //}
+       
         public IActionResult Add()
         {
             return View();

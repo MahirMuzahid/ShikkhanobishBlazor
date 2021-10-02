@@ -1,4 +1,6 @@
-﻿@page "/"
+﻿
+@page "/"
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -83,36 +85,40 @@
                     <li class="menu-title">Navigation</li>
 
                     <li>
-                        <a href="Index">
-                            <i class="ti-home"></i>
+                        <a href="https://dashboard.shikkhanobish.com/index.html">
+                            <i class="fas fa-home"></i>
                             <span> Dashboard </span>
                         </a>
                     </li>
-
                     <li>
-                        <a href="Student">
+                        <a href="Count">
+                            <i class="fas fa-calculator"></i>
+                            <span> Count </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://dashboard.shikkhanobish.com/student.html">
                             <i class="fas fa-user-graduate"></i>
                             <span> Student </span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="Teacher">
+                        <a href="https://dashboard.shikkhanobish.com/teacher.html">
                             <i class="fas fa-user"></i>
                             <span> Teacher </span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="Voucher">
-                            <i class="ti-paint-bucket"></i>
+                        <a href="https://dashboard.shikkhanobish.com/voucher.html">
+                            <i class="fas fa-fill-drip"></i>
                             <span> Voucher </span>
                         </a>
                     </li>
 
-
                     <li>
-                        <a href="Add">
+                        <a href="https://dashboard.shikkhanobish.com/add.html">
                             <i class="fas fa-plus-square"></i>
                             <span> Add </span>
                         </a>
@@ -128,52 +134,13 @@
         <!-- Start Page Content here -->
         <!-- ============================================================== -->
 
+
         <div class="content-page">
             <div class="content">
 
                 <!-- Start container-fluid -->
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12">
-                            <div>
-                                <div class="card-box widget-inline">
-                                    <div class="row">
-                                        <div class="col-xl-3 col-sm-6 widget-inline-box">
-                                            <div class="text-center p-3">
-                                                <h2 class="mt-2"><i class="fas fa-dollar-sign text-primary mr-2"></i> <b id="total_income">0</b></h2>
-                                                <p class="text-muted mb-0">Total Income</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xl-3 col-sm-6 widget-inline-box">
-                                            <div class="text-center p-3">
-                                                <h2 class="mt-2"><i class="fas fa-user-graduate text-teal mr-2"></i> <b onload="get_Count()" id="randomNum"></b></h2>
-                                                <p class="text-muted mb-0">Total Student</p>
-
-
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xl-3 col-sm-6 widget-inline-box">
-                                            <div class="text-center p-3">
-                                                <h2 class="mt-2"> <i class="fas fa-user text-info mr-2"></i><b id="total_teacher">0</b></h2>
-                                                <p class="text-muted mb-0">Total Teacher</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xl-3 col-sm-6">
-                                            <div class="text-center p-3">
-                                                <h2 class="mt-2"><i class="fas fa-dollar-sign text-primary mr-2"></i><b id="total_tuition">0</b></h2>
-                                                <p class="text-muted mb-0">Total Tuition</p>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--end row -->
+                    
 
                     <div class="row">
                         <div class="col-lg-6">
@@ -237,6 +204,7 @@
                         </div>
                         <!--// morris-line-chart -->
                     </div>
+                    <br />
                     <!-- end row -->
                     <!-- Teacher Withdraw Reqest -->
                     <div class="row">
@@ -258,6 +226,7 @@
                         </div>
                     </div>
                 </div>
+                <br />
                 <!-- end container-fluid -->
                 <!-- Footer Start -->
                 <footer class="footer">
@@ -281,3 +250,5 @@
     <!-- Vendor js -->
 </body>
 </html>
+
+

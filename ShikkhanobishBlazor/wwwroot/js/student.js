@@ -151,6 +151,3 @@ function generate_datatable(target_dom, data_source){
     } );
 }
 
-$(document).ready(function() {
-    startup_calls()
-} );
