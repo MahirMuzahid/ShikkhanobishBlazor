@@ -1,11 +1,15 @@
-﻿@page "/Teacher"
+﻿@page "/Question"
+@using ShikkhanobishBlazor.Models
+@using Flurl.Http;
+
+
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8" />
-    <title>Teacher</title>
+    <title>Question</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Responsive bootstrap 4 admin template" name="description" />
     <meta content="Coderthemes" name="author" />
@@ -114,6 +118,7 @@
                             <span> Question </span>
                         </a>
                     </li>
+
                     <li>
                         <a href="Voucher">
                             <i class="fas fa-fill-drip"></i>
@@ -144,19 +149,60 @@
 
                 <!-- Start container-fluid -->
                 <div class="container-fluid">
-                    
+
                     <!-- Teacher -->
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card studentTable">
                                 <div class="card-header">
-                                    <h5>Teacher</h5>
+                                    <h5>Question</h5>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-area">
                                         <!-- table-responsive -->
                                         <div class="table-responsive">
-                                            <table id="all_teachers_datatable" class="table table-bordered">
+                                            <table id="all_question_datatable" class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>questionID</th>
+                                                        <th>classID</th>
+                                                        <th>subjectID</th>
+                                                        <th>chapterID</th>
+                                                        <th>topicID</th>
+                                                        <th>mainQuestion</th>
+                                                        <th>option1</th>
+                                                        <th>option2</th>
+                                                        <th>option3</th>
+                                                        <th>option4</th>
+                                                        <th>rightAnswer</th>
+                                                        <th>noOfQs</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+
+                                                    @foreach (var item in objList)
+                                                    {
+
+                                                    <tr>
+                                                        <td>@item.questionID</td>
+                                                        <td>@item.classID</td>
+                                                        <td>@item.subjectID</td>
+                                                        <td>@item.chapterID</td>
+                                                        <td>@item.topicID</td>
+                                                        <td>@item.mainQuestion</td>
+                                                        <td>@item.option1</td>
+                                                        <td>@item.option2</td>
+                                                        <td>@item.option3</td>
+                                                        <td>@item.option4</td>
+                                                        <td>@item.rightAnswer</td>
+                                                        <td>@item.noOfQs</td>
+                                                    </tr>
+                                                    }
+                                                </tbody>
+
+
+
                                             </table>
                                         </div>
                                     </div>
@@ -166,25 +212,7 @@
                     </div>
 
 
-                    <!-- Teacher Course List -->
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card studentTable">
-                                <div class="card-header">
-                                    <h5>Teacher Course List</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-area">
-                                        <!-- table-responsive -->
-                                        <div class="table-responsive">
-                                            <table id="all_teacher_course_list_datatable" class="table table-bordered">
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
 
                 </div>
                 <!-- end container-fluid -->
@@ -209,6 +237,20 @@
     </div>
     <!-- END wrapper -->
     <!-- Vendor js -->
-   
+
 </body>
 </html>
+
+@code{
+    List<Questions> objList = new List<Questions>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetQuestion();
+    }
+    public async Task GetQuestion()
+    {
+        objList = await "https://api.shikkhanobish.com/api/ShikkhanobishLogin/getQuestion".GetJsonAsync<List<Questions>>();
+
+    }
+}
