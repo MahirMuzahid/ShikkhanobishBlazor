@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ShikkhanobishBlazor.Models
 {
-    public class Teacher
+    public class Teachers
     {
         public int teacherID { get; set; }
         public string name { get; set; }
