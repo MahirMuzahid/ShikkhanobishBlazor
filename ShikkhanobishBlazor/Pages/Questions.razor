@@ -1,12 +1,15 @@
-﻿
-@page "/"
+﻿@page "/Question"
+@using ShikkhanobishBlazor.Models
+@using Flurl.Http;
+
+
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8" />
-    <title>Dashboard</title>
+    <title>Question</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Responsive bootstrap 4 admin template" name="description" />
     <meta content="Coderthemes" name="author" />
@@ -18,6 +21,7 @@
 
     <!-- Begin page -->
     <div id="wrapper">
+
 
         <!-- Topbar Start -->
         <div class="navbar-custom">
@@ -48,8 +52,7 @@
                         <img src="/images/logo1.png" alt="" height="22" />
                     </span>
                 </a>
-
-                <a href="Index" class="logo text-center logo-light">
+                <a href="index.html" class="logo text-center logo-light">
                     <span class="logo-lg">
                         <img src="/images/logo1.png" alt="" height="50" />
                     </span>
@@ -75,7 +78,7 @@
                     <img src="/images/images.png" alt="" class="avatar-md rounded-circle" />
                 </div>
                 <div class="user-info">
-                    <a href="#">Maxine K</a>
+                    <a href="#">Jones</a>
                 </div>
             </div>
 
@@ -85,7 +88,7 @@
                     <li class="menu-title">Navigation</li>
 
                     <li>
-                        <a href="https://dashboard.shikkhanobish.com/index.html">
+                        <a href="">
                             <i class="fas fa-home"></i>
                             <span> Dashboard </span>
                         </a>
@@ -97,20 +100,14 @@
                         </a>
                     </li>
                     <li>
-                        <a href="https://dashboard.shikkhanobish.com/student.html">
+                        <a href="Student">
                             <i class="fas fa-user-graduate"></i>
                             <span> Student </span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="https://dashboard.shikkhanobish.com/teacher.html">
-                            <i class="fas fa-user"></i>
-                            <span> Teacher </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://dashboard.shikkhanobish.com/teacher.html">
+                        <a href="Teacher">
                             <i class="fas fa-user"></i>
                             <span> Teacher </span>
                         </a>
@@ -121,14 +118,17 @@
                             <span> Question </span>
                         </a>
                     </li>
+
                     <li>
-                        <a href="MakeQuestion">
-                            <i class="fas fa-marker"></i>
-                            <span> Make Question </span>
+                        <a href="Voucher">
+                            <i class="fas fa-fill-drip"></i>
+                            <span> Voucher </span>
                         </a>
                     </li>
+
+
                     <li>
-                        <a href="https://dashboard.shikkhanobish.com/add.html">
+                        <a href="Add">
                             <i class="fas fa-plus-square"></i>
                             <span> Add </span>
                         </a>
@@ -144,90 +144,65 @@
         <!-- Start Page Content here -->
         <!-- ============================================================== -->
 
-
         <div class="content-page">
             <div class="content">
 
                 <!-- Start container-fluid -->
                 <div class="container-fluid">
-                    
 
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="mt-5">
-                                <h5 class="font-14">Institution</h5>
-                                <canvas id="institute-v-firstchoice-bar"></canvas>
-                            </div>
-                        </div>
-                        <!--// morris-bar-chart -->
-
-                        <div class="col-lg-6">
-                            <div class="mt-5">
-                                <h5 class="font-14">ClassInfo</h5>
-                                <canvas id="classinfo-v-secondchoice-bar"></canvas>
-                            </div>
-                        </div>
-                        <!--// morris-bar-chart2 -->
-
-                        <div class="col-lg-6">
-                            <div class="mt-5">
-                                <h5 class="font-14">Subject</h5>
-                                <canvas id="subject-v-thirdchoice-bar"></canvas>
-                            </div>
-                        </div>
-                        <!--// morris-bar-chart3 -->
-
-                        <div class="col-lg-6">
-                            <div class="mt-5">
-                                <h5 class="font-14">Chapter</h5>
-                                <canvas id="chapter-v-forthchoice-bar"></canvas>
-                            </div>
-                        </div>
-                        <!--// morris-bar-chart4 -->
-
-                        <div class="col-lg-6">
-                            <div class="mt-5">
-                                <h5 class="font-14">Income Per Subject</h5>
-                                <canvas id="subject-v-income-bar"></canvas>
-                            </div>
-                        </div>
-                        <!--// morris-bar-chart6 -->
-
-
-
-                        <div class="col-lg-6">
-                            <div class="mt-5">
-                                <h5 class="font-14">Income Per Chapter</h5>
-                                <canvas id="chapter-v-income-bar"></canvas>
-                            </div>
-                        </div>
-                        <!--// morris-bar-chart7 -->
-
-
-
-
-                        <div class="col-lg-6">
-                            <div class="mt-5">
-                                <h5 class="font-14">Tuition Per Day</h5>
-                                <canvas id="tuition-v-date-line"></canvas>
-                            </div>
-                        </div>
-                        <!--// morris-line-chart -->
-                    </div>
-                    <br />
-                    <!-- end row -->
-                    <!-- Teacher Withdraw Reqest -->
+                    <!-- Teacher -->
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="card teacherWithdrawTable">
+                            <div class="card studentTable">
                                 <div class="card-header">
-                                    <h5>Withdraw Request</h5>
+                                    <h5>Question</h5>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-area">
                                         <!-- table-responsive -->
                                         <div class="table-responsive">
-                                            <table id="all_withdraw_list" class="table table-bordered">
+                                            <table id="all_question_datatable" class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>questionID</th>
+                                                        <th>classID</th>
+                                                        <th>subjectID</th>
+                                                        <th>chapterID</th>
+                                                        <th>topicID</th>
+                                                        <th>mainQuestion</th>
+                                                        <th>option1</th>
+                                                        <th>option2</th>
+                                                        <th>option3</th>
+                                                        <th>option4</th>
+                                                        <th>rightAnswer</th>
+                                                        <th>noOfQs</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+
+                                                    @foreach (var item in objList)
+                                                    {
+
+                                                    <tr>
+                                                        <td>@item.questionID</td>
+                                                        <td>@item.classID</td>
+                                                        <td>@item.subjectID</td>
+                                                        <td>@item.chapterID</td>
+                                                        <td>@item.topicID</td>
+                                                        <td>@item.mainQuestion</td>
+                                                        <td>@item.option1</td>
+                                                        <td>@item.option2</td>
+                                                        <td>@item.option3</td>
+                                                        <td>@item.option4</td>
+                                                        <td>@item.rightAnswer</td>
+                                                        <td>@item.review</td>
+                                                    </tr>
+                                                    }
+                                                </tbody>
+
+
+
                                             </table>
                                         </div>
                                     </div>
@@ -235,8 +210,11 @@
                             </div>
                         </div>
                     </div>
+
+
+
+
                 </div>
-                <br />
                 <!-- end container-fluid -->
                 <!-- Footer Start -->
                 <footer class="footer">
@@ -249,6 +227,7 @@
                     </div>
                 </footer>
                 <!-- end Footer -->
+
             </div>
             <!-- end content -->
 
@@ -258,7 +237,20 @@
     </div>
     <!-- END wrapper -->
     <!-- Vendor js -->
+
 </body>
 </html>
 
+@code{
+    List<Models.Question> objList = new List<Models.Question>();
 
+    protected override async Task OnInitializedAsync()
+    {
+        await GetQuestion();
+    }
+    public async Task GetQuestion()
+    {
+        objList = await "https://api.shikkhanobish.com/api/ShikkhanobishLogin/getQuestion".GetJsonAsync<List<Models.Question>>();
+
+    }
+}

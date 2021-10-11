@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 
 namespace ShikkhanobishBlazor.Models
 {
-    public class Questions
+    public class Question
     {
         public int questionID { get; set; }
         public int classID { get; set; }
+        public string className { get; set; }
         public int subjectID { get; set; }
         public int chapterID { get; set; }
         public int topicID { get; set; }
@@ -18,7 +19,8 @@ namespace ShikkhanobishBlazor.Models
         public string option3 { get; set; }
         public string option4 { get; set; }
         public int rightAnswer { get; set; }
-        public int noOfQs { get; set; }
+        public int review { get; set; }
+        public string quesImages { get; set; }
         public string Response { get; set; }
     }
 }
