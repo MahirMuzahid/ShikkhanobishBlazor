@@ -627,7 +627,53 @@
                     </div>
 
                     <br />
-                    <hr />
+                    <br />
+                    <div class="row">
+                        <div class="col-12">
+                            <div>
+                                <div class="card-box widget-inline">
+                                    <div class="row">
+                                        <div class="col-xl-3 col-sm-3 widget-inline-box">
+                                            <div class="text-center p-3">
+
+                                                <h2 class="mt-2"> <b>@totalQues</b></h2>
+                                                <p class="text-muted mb-0">Total Question</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-3 col-sm-3 widget-inline-box">
+                                            <div class="text-center p-3">
+                                                <h2 class="mt-2"><b>@approvedQues</b></h2>
+                                                <p class="text-muted mb-0">Approved</p>
+
+
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-sm-3 widget-inline-box">
+                                            <div class="text-center p-3">
+                                                <h2 class="mt-2"><b>@notapprovedQues</b></h2>
+                                                <p class="text-muted mb-0">Not Approved</p>
+
+
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-sm-3 ">
+                                            <div class="text-center p-3">
+                                                <h2 class="mt-2"><b>@pendingQues</b></h2>
+                                                <p class="text-muted mb-0">Pending</p>
+
+
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
                     <br />
 
                     <div class="">
@@ -774,6 +820,13 @@
     int countPending;
     int teachID;
 
+
+    int totalQues;
+    int approvedQues;
+    int notapprovedQues;
+    int pendingQues;
+
+
     List<TeacherQuestionStatusCount> tqscResult = new List<TeacherQuestionStatusCount>();
 
     protected override async Task OnInitializedAsync()
@@ -789,6 +842,7 @@
         await GetQuestionCountByClass();
         await GetQuestionByGroupAndClass();
         await GetTeacherQuestionHistory();
+        
     }
 
 
@@ -1257,7 +1311,7 @@
 
     public async Task GetTeacherQuestionHistory()
     {
-        int tid = 0;
+        
         int count1 = 0;
         int count2 = 0;
         int count3 = 0;
@@ -1265,37 +1319,6 @@
         var thList = await "https://api.shikkhanobish.com/api/ShikkhanobishLogin/getTeacherQuestionHistory".GetJsonAsync<List<TecaherQuestionHistory>>();
         var quesList = await "https://api.shikkhanobish.com/api/ShikkhanobishLogin/getQuestion".GetJsonAsync<List<Question>>();
 
-        //for (int i = 0; i < thList.Count; i++)
-        //{
-        //    for (int j = 0; j < quesList.Count; j++)
-        //    {
-        //        if (thList[i].questionID == quesList[j].questionID && quesList[j].review == 1)
-        //        {
-        //            tid = thList[i].teacherID;
-        //            count1++;
-        //        }
-        //        if (thList[i].questionID == quesList[j].questionID && quesList[j].review == 2)
-        //        {
-        //            tid = thList[i].teacherID;
-        //            count2++;
-        //        }
-        //        if (thList[i].questionID == quesList[j].questionID && quesList[j].review == 0)
-        //        {
-        //            tid = thList[i].teacherID;
-        //            count3++;
-        //        }
-
-        //    }
-
-        //}
-        //teachID = tid;
-        //countApproved = count1;
-        //countNotApproved = count2;
-        //countPending = count3;
-
-
-
-        int start = 0;
         List<int> teacherIDList = new List<int>();
         List<int> uniqueTeacherID = new List<int>();
         List<int> countList = new List<int>();
@@ -1376,7 +1399,19 @@
         }
         countApproved = count1;
         tqscResult = tqsc;
+        for (int i = 0; i < tqsc.Count; i++)
+        {
+            count1 += tqsc[i].approved;
+            count2 += tqsc[i].notApproved;
+            count3 += tqsc[i].pending;
+        }
+        approvedQues = count1;
+        notapprovedQues = count2;
+        pendingQues = count3;
+        totalQues = count1 + count2 + count3;
     }
+
+    
 }
 
 
