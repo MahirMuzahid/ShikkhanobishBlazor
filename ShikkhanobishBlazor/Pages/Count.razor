@@ -433,7 +433,7 @@
                                         <th>Biology</th>
                                         <th>GeneralMath</th>
                                         <th>HigherMath</th>
-                                        
+
 
 
                                     </tr>
@@ -445,10 +445,10 @@
                                         <td>@countClass9and10Biology</td>
                                         <td>@countClass9and10GeneralMath</td>
                                         <td>@countClass9and10HigherMath</td>
-                                        
+
 
                                     </tr>
-                                   
+
 
                                 </tbody>
 
@@ -466,7 +466,7 @@
                             <table id="" class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        
+
                                         <th>Finance</th>
                                         <th>Business Entrepreneurship</th>
                                         <th>General Science</th>
@@ -510,7 +510,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
+
                                     <tr>
                                         <td>@countClass9and10Logic</td>
                                         <td>@countClass9and10Eco</td>
@@ -519,7 +519,7 @@
                                         <td>@countClass9and10IT</td>
                                     </tr>
 
-                                    
+
 
                                 </tbody>
 
@@ -563,7 +563,7 @@
                                         <td>@countClass11and12Biology2</td>
                                         <td>@countClass11and12HigherMath1</td>
                                         <td>@countClass11and12HigherMath2</td>
-                                       
+
                                     </tr>
                                 </tbody>
 
@@ -581,18 +581,20 @@
                             <table id="" class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-
+                                        <th>Accounting</th>
+                                        <th>Business Organization</th>
+                                        <th>Economics</th>
+                                        <th>Finance & Banking</th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
-
+                                    <tr>
+                                        <td>@countClass11and12Accounting</td>
+                                        <td>@countClass11and12Business</td>
+                                        <td>@countClass11and12Eco</td>
+                                        <td>@countClass11and12Finance</td>
+                                    </tr>
                                 </tbody>
 
 
@@ -610,18 +612,13 @@
                             <table id="" class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-
-
+                                        <th>Logic</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                   
-
+                                    <tr>
+                                        <td>@countClass11and12Logic</td>
+                                    </tr>
                                 </tbody>
 
 
@@ -629,7 +626,42 @@
                         </div>
                     </div>
 
+                    <br />
+                    <hr />
+                    <br />
 
+                    <div class="">
+                        <label style="color:blueviolet;font-size:32px;">Approval of Teacher Section </label>
+                    </div>
+                    <div class="row">
+                        <h5 style="color:blueviolet">Question Approval Count</h5>
+                        <div class="table-responsive">
+                            <table id="" class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>TeacherId</th>
+                                        <th>Approved</th>
+                                        <th>NotApproved</th>
+                                        <th>Pending</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (int i = 0; i < tqscResult.Count; i++)
+                                    {
+                                        <tr>
+                                            <td>@tqscResult[i].teacherID</td>
+                                            <td>@tqscResult[i].approved</td>
+                                            <td>@tqscResult[i].notApproved</td>
+                                            <td>@tqscResult[i].pending</td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+
+
+                            </table>
+                        </div>
+                    </div>
 
 
                 </div>
@@ -726,22 +758,23 @@
     int countClass11and12HigherMath1;
     int countClass11and12HigherMath2;
 
-    int countClass11and12Accounting1;
-    int countClass11and12Accounting2;
-    int countClass11and12Entre1;
-    int countClass11and12Entre2;
-    int countClass11and12Finance1;
-    int countClass11and12Finance2;
-
-
-    int countClass11and12Eco1;
-    int countClass11and12Eco2;
-    int countClass11and12IT1;
-    int countClass11and12IT2;
+    int countClass11and12Accounting;
+    int countClass11and12Business;
+    int countClass11and12Eco;
+    int countClass11and12Finance;
 
 
 
+    int countClass11and12Logic;
 
+
+
+    int countApproved;
+    int countNotApproved;
+    int countPending;
+    int teachID;
+
+    List<TeacherQuestionStatusCount> tqscResult = new List<TeacherQuestionStatusCount>();
 
     protected override async Task OnInitializedAsync()
     {
@@ -755,6 +788,7 @@
         await GetMonetizedTeacher();
         await GetQuestionCountByClass();
         await GetQuestionByGroupAndClass();
+        await GetTeacherQuestionHistory();
     }
 
 
@@ -1128,9 +1162,7 @@
         int ccount44 = 0;
 
         int ccount111 = 0;
-        int ccount222 = 0;
-        int ccount333 = 0;
-        int ccount444 = 0;
+
 
         for (int i = 0; i < quesInfoList.Count; i++)
         {
@@ -1173,9 +1205,28 @@
 
 
                 //Commerce
-                if (quesInfoList[i].classID == 102 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 113)
+                if (quesInfoList[i].classID == 102 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 121)
                 {
-                    ccount1++;
+                    ccount11++;
+                }
+                if (quesInfoList[i].classID == 102 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 122)
+                {
+                    ccount22++;
+                }
+                if (quesInfoList[i].classID == 102 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 123)
+                {
+                    ccount33++;
+                }
+                if (quesInfoList[i].classID == 102 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 124)
+                {
+                    ccount44++;
+                }
+
+
+                //Arts
+                if (quesInfoList[i].classID == 102 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 125)
+                {
+                    ccount111++;
                 }
             }
         }
@@ -1189,8 +1240,145 @@
         countClass11and12HigherMath1 = ccount7;
         countClass11and12HigherMath2 = ccount8;
 
+
+        countClass11and12Accounting = ccount11;
+        countClass11and12Business = ccount22;
+        countClass11and12Eco = ccount33;
+        countClass11and12Finance = ccount44;
+
+        countClass11and12Logic = ccount111;
+
+
+
+    }
+
+
+
+
+    public async Task GetTeacherQuestionHistory()
+    {
+        int tid = 0;
+        int count1 = 0;
+        int count2 = 0;
+        int count3 = 0;
+
+        var thList = await "https://api.shikkhanobish.com/api/ShikkhanobishLogin/getTeacherQuestionHistory".GetJsonAsync<List<TecaherQuestionHistory>>();
+        var quesList = await "https://api.shikkhanobish.com/api/ShikkhanobishLogin/getQuestion".GetJsonAsync<List<Question>>();
+
+        //for (int i = 0; i < thList.Count; i++)
+        //{
+        //    for (int j = 0; j < quesList.Count; j++)
+        //    {
+        //        if (thList[i].questionID == quesList[j].questionID && quesList[j].review == 1)
+        //        {
+        //            tid = thList[i].teacherID;
+        //            count1++;
+        //        }
+        //        if (thList[i].questionID == quesList[j].questionID && quesList[j].review == 2)
+        //        {
+        //            tid = thList[i].teacherID;
+        //            count2++;
+        //        }
+        //        if (thList[i].questionID == quesList[j].questionID && quesList[j].review == 0)
+        //        {
+        //            tid = thList[i].teacherID;
+        //            count3++;
+        //        }
+
+        //    }
+
+        //}
+        //teachID = tid;
+        //countApproved = count1;
+        //countNotApproved = count2;
+        //countPending = count3;
+
+
+
+        int start = 0;
+        List<int> teacherIDList = new List<int>();
+        List<int> uniqueTeacherID = new List<int>();
+        List<int> countList = new List<int>();
+
+        for (int i = 0; i < thList.Count; i++)
+        {
+            teacherIDList.Add(thList[i].teacherID);
+        }
+
+        for (int i = 0; i < teacherIDList.Count; i++)
+        {
+            bool isDone = false;
+
+            //check already counted
+            if (uniqueTeacherID.Count != 0)
+            {
+                for (int k = 0; k < uniqueTeacherID.Count; k++)
+                {
+                    if (uniqueTeacherID[k] == teacherIDList[i])
+                    {
+
+                        isDone = true;
+                    }
+                }
+            }
+
+
+
+            if (!isDone)
+            {
+                uniqueTeacherID.Add(teacherIDList[i]);
+                int num = 0;
+                for (int j = 0; j < teacherIDList.Count; j++)
+                {
+                    if (teacherIDList[i] == teacherIDList[j])
+                    {
+                        num++;
+                    }
+
+                }
+                countList.Add(num);
+
+
+            }
+
+        }
+        List<TeacherQuestionStatusCount> tqsc = new List<TeacherQuestionStatusCount>();
+        for (int i = 0; i < uniqueTeacherID.Count; i++)
+        {
+            TeacherQuestionStatusCount newtqsc = new TeacherQuestionStatusCount();
+            for (int j = 0; j < thList.Count; j++)
+            {
+                if (uniqueTeacherID[i]==thList[j].teacherID)
+                {
+                    newtqsc.teacherID = uniqueTeacherID[i];
+                    for (int k = 0; k < quesList.Count; k++)
+                    {
+                        if(thList[j].questionID == quesList[k].questionID)
+                        {
+                            if(quesList[k].review == 0)
+                            {
+                                newtqsc.pending++;
+                            }
+                            if (quesList[k].review == 1)
+                            {
+                                newtqsc.approved++;
+                            }
+                            if (quesList[k].review == 2)
+                            {
+                                newtqsc.notApproved++;
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+            tqsc.Add(newtqsc);
+        }
+        countApproved = count1;
+        tqscResult = tqsc;
     }
 }
+
 
 
 
