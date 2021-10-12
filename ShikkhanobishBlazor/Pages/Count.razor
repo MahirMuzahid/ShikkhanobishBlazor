@@ -327,9 +327,6 @@
 
                                             </div>
                                         </div>
-
-
-
                                     </div>
                                 </div>
                             </div>
@@ -340,8 +337,10 @@
 
                     <br />
                     <br />
-                    <div class="justify-content-center">
-                        <label style="background-color:blueviolet">Question Section</label>
+                    <div class="form-group row">
+                        <div class="col-12 align-content-center">
+                            <label style="color:blueviolet;font-size:32px;">Question Section</label>
+                        </div>
                     </div>
 
                     <div class="row">
@@ -501,18 +500,24 @@
                             <table id="" class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>Question</th>
-                                        <th>Option1</th>
-                                        <th>Option2</th>
-                                        <th>Option3</th>
-                                        <th>Option4</th>
+                                        <th>Logic</th>
+                                        <th>Economics</th>
+                                        <th>Geography</th>
+                                        <th>Civic</th>
+                                        <th>IT</th>
 
 
                                     </tr>
                                 </thead>
                                 <tbody>
                                     
-
+                                    <tr>
+                                        <td>@countClass9and10Logic</td>
+                                        <td>@countClass9and10Eco</td>
+                                        <td>@countClass9and10Geo</td>
+                                        <td>@countClass9and10Civic</td>
+                                        <td>@countClass9and10IT</td>
+                                    </tr>
 
                                     
 
@@ -536,17 +541,30 @@
                             <table id="" class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>Question</th>
-                                        <th>Option1</th>
-                                        <th>Option2</th>
-                                        <th>Option3</th>
-                                        <th>Option4</th>
+                                        <th>Physics1st</th>
+                                        <th>Physics2nd</th>
+                                        <th>Chemistry1st</th>
+                                        <th>Chemistry2nd</th>
+                                        <th>Biology1st</th>
+                                        <th>Biology2nd</th>
+                                        <th>HigherMath1st</th>
+                                        <th>HigherMath2nd</th>
 
 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
+                                    <tr>
+                                        <td>@countClass11and12Physics1</td>
+                                        <td>@countClass11and12Physics2</td>
+                                        <td>@countClass11and12Chemistry1</td>
+                                        <td>@countClass11and12Chemistry2</td>
+                                        <td>@countClass11and12Biology1</td>
+                                        <td>@countClass11and12Biology2</td>
+                                        <td>@countClass11and12HigherMath1</td>
+                                        <td>@countClass11and12HigherMath2</td>
+                                       
+                                    </tr>
                                 </tbody>
 
 
@@ -563,11 +581,11 @@
                             <table id="" class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>Question</th>
-                                        <th>Option1</th>
-                                        <th>Option2</th>
-                                        <th>Option3</th>
-                                        <th>Option4</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
 
 
                                     </tr>
@@ -592,11 +610,11 @@
                             <table id="" class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>Question</th>
-                                        <th>Option1</th>
-                                        <th>Option2</th>
-                                        <th>Option3</th>
-                                        <th>Option4</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
 
 
                                     </tr>
@@ -662,6 +680,7 @@
     int countMonetized;
     int countOnlySelected;
 
+
     int numQuestion8;
     int numQuestion9and10;
     int numQuestion11and12;
@@ -688,7 +707,38 @@
 
     int countClass9and10Eco;
     int countClass9and10IT;
-    int countClass9and10Science2;
+
+    int countClass9and10Logic;
+    int countClass9and10Geo;
+    int countClass9and10Civic;
+
+
+
+
+
+
+    int countClass11and12Physics1;
+    int countClass11and12Physics2;
+    int countClass11and12Chemistry1;
+    int countClass11and12Chemistry2;
+    int countClass11and12Biology1;
+    int countClass11and12Biology2;
+    int countClass11and12HigherMath1;
+    int countClass11and12HigherMath2;
+
+    int countClass11and12Accounting1;
+    int countClass11and12Accounting2;
+    int countClass11and12Entre1;
+    int countClass11and12Entre2;
+    int countClass11and12Finance1;
+    int countClass11and12Finance2;
+
+
+    int countClass11and12Eco1;
+    int countClass11and12Eco2;
+    int countClass11and12IT1;
+    int countClass11and12IT2;
+
 
 
 
@@ -903,22 +953,6 @@
         int counte1 = 0;
         int counte2 = 0;
 
-        int count1 = 0;
-        int count2 = 0;
-        int count3 = 0;
-        int count4 = 0;
-
-
-        int count11 = 0;
-        int count22 = 0;
-        int count33 = 0;
-        int count44 = 0;
-
-        int count111 = 0;
-        int count222 = 0;
-        int count333 = 0;
-        int count444 = 0;
-
         //class8
         for (int k = 0; k < quesInfoList.Count; k++)
         {
@@ -934,12 +968,31 @@
             else if (quesInfoList[k].classID == 103 && quesInfoList[k].subjectID == 130)
             {
 
-                count2++;
+                counte2++;
             }
 
         }
         class8Science = counte1;
         class8Math = counte2;
+
+
+        //class 9&10
+        int count1 = 0;
+        int count2 = 0;
+        int count3 = 0;
+        int count4 = 0;
+
+
+        int count11 = 0;
+        int count22 = 0;
+        int count33 = 0;
+        int count44 = 0;
+
+        int count111 = 0;
+        int count222 = 0;
+        int count333 = 0;
+        int count444 = 0;
+        int count555 = 0;
 
 
 
@@ -948,6 +1001,7 @@
 
             for (int j = 0; j < groupInfoList.Count; j++)
             {
+                //Science
                 if (quesInfoList[i].classID == 101 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 101)
                 {
                     count1++;
@@ -973,7 +1027,7 @@
 
 
 
-
+                //Commerce
 
                 if (quesInfoList[i].classID == 101 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 107)
                 {
@@ -999,20 +1053,141 @@
                 }
 
 
+                //Arts
+                if (quesInfoList[i].classID == 101 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 125)
+                {
+                    count111++;
+                }
+
+
+                if (quesInfoList[i].classID == 101 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 126)
+                {
+                    count222++;
+                }
+
+
+                if (quesInfoList[i].classID == 101 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 127)
+                {
+                    count333++;
+                }
+
+
+                if (quesInfoList[i].classID == 101 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 128)
+                {
+                    count444++;
+                }
+
+
+                if (quesInfoList[i].classID == 101 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 112)
+                {
+                    count555++;
+                }
+
+
             }
 
 
+
+
         }
+
+
         countClass9and10Physics = count1;
         countClass9and10Chemistry = count2;
         countClass9and10Biology = count3;
-        countClass9and10GeneralMath = count4;
+        countClass9and10HigherMath = count4;
 
 
         countClass9and10Finance = count11;
         countClass9and10Entre = count22;
         countClass9and10Science = count33;
         countClass9and10Accounting = count44;
+
+        countClass9and10Logic = count111;
+        countClass9and10Eco = count222;
+        countClass9and10Geo = count333;
+        countClass9and10Civic = count444;
+        countClass9and10IT = count555;
+
+
+
+        //class 11&12
+        int ccount1 = 0;
+        int ccount2 = 0;
+        int ccount3 = 0;
+        int ccount4 = 0;
+        int ccount5 = 0;
+        int ccount6 = 0;
+        int ccount7 = 0;
+        int ccount8 = 0;
+
+
+        int ccount11 = 0;
+        int ccount22 = 0;
+        int ccount33 = 0;
+        int ccount44 = 0;
+
+        int ccount111 = 0;
+        int ccount222 = 0;
+        int ccount333 = 0;
+        int ccount444 = 0;
+
+        for (int i = 0; i < quesInfoList.Count; i++)
+        {
+
+            for (int j = 0; j < groupInfoList.Count; j++)
+            {
+                //Science
+                if (quesInfoList[i].classID == 102 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 113)
+                {
+                    ccount1++;
+                }
+                if (quesInfoList[i].classID == 102 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 117)
+                {
+                    ccount2++;
+                }
+                if (quesInfoList[i].classID == 102 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 114)
+                {
+                    ccount3++;
+                }
+                if (quesInfoList[i].classID == 102 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 118)
+                {
+                    ccount4++;
+                }
+                if (quesInfoList[i].classID == 102 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 115)
+                {
+                    ccount5++;
+                }
+                if (quesInfoList[i].classID == 102 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 119)
+                {
+                    ccount6++;
+                }
+                if (quesInfoList[i].classID == 102 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 116)
+                {
+                    ccount7++;
+                }
+                if (quesInfoList[i].classID == 102 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 120)
+                {
+                    ccount8++;
+                }
+
+
+                //Commerce
+                if (quesInfoList[i].classID == 102 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 113)
+                {
+                    ccount1++;
+                }
+            }
+        }
+
+        countClass11and12Physics1 = ccount1;
+        countClass11and12Physics2 = ccount2;
+        countClass11and12Chemistry1 = ccount33;
+        countClass11and12Chemistry2 = ccount4;
+        countClass11and12Biology1 = ccount5;
+        countClass11and12Biology2 = ccount6;
+        countClass11and12HigherMath1 = ccount7;
+        countClass11and12HigherMath2 = ccount8;
 
     }
 }
