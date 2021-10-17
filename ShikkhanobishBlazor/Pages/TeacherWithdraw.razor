@@ -1,17 +1,19 @@
-﻿
-@page "/"
+﻿@using ShikkhanobishBlazor.Models
+@using Flurl.Http
+
+@page "/TeacherWithdraw"
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8" />
-    <title>Dashboard</title>
+    <title>TeacherWithdraw</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Responsive bootstrap 4 admin template" name="description" />
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
+    <link href="~/css/makeQues.css" />
 </head>
 
 <body>
@@ -97,12 +99,16 @@
                         </a>
                     </li>
 
+
+
+
                     <li>
                         <a href="Questions">
                             <i class="far fa-question-circle"></i>
                             <span> Question </span>
                         </a>
                     </li>
+
                     <li>
                         <a href="ActiveTeacher">
                             <i class="fas fa-lightbulb"></i>
@@ -122,6 +128,8 @@
                             <span> Teacher Withdraw </span>
                         </a>
                     </li>
+
+
                 </ul>
             </div>
             <!-- End Sidebar -->
@@ -139,91 +147,57 @@
 
                 <!-- Start container-fluid -->
                 <div class="container-fluid">
-                    
 
                     <div class="row">
-                        <div class="col-lg-6">
-                            <div class="mt-5">
-                                <h5 class="font-14">Institution</h5>
-                                <canvas id="institute-v-firstchoice-bar"></canvas>
-                            </div>
+                        <div class="table-responsive">
+                            <table id="" class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>WithdrawID</th>
+                                        <th>Date</th>
+                                        <th>TrxID</th>
+                                        <th>AmountTaka</th>
+                                        <th>Medium</th>
+                                        <th>TeacherID</th>
+                                        <th>PhoneNumber</th>
+                                        <th>Status</th>
+                                        <th>Response</th>
+                                        <th>InputTrxID</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (int i = 0; i < twh.Count; i++)
+                                    {
+                                    <tr>
+                                        <td>@twh[i].withdrawID</td>
+                                        <td>@twh[i].date</td>
+                                        <td>@twh[i].trxID</td>
+                                        <td>@twh[i].amountTaka</td>
+                                        <td>@twh[i].medium</td>
+                                        <td>@twh[i].teacherID</td>
+                                        <td>@twh[i].phoneNumber</td>
+                                        <td>@twh[i].status</td>
+                                        <td>
+                                            <button style="width:150px;" class="btn btn-outline-purple">Accept</button> &nbsp;<button style="width:150px;" class="btn btn-outline-purple">Decline</button>
+                                            
+                                        </td>
+                                      
+                                        <td><input type="text" class="border border-purple" style="width:100px; padding:1px;margin-top:35px" /></td>
+                                    </tr>
+                                    }
+
+                                </tbody>
+
+
+                            </table>
                         </div>
-                        <!--// morris-bar-chart -->
-
-                        <div class="col-lg-6">
-                            <div class="mt-5">
-                                <h5 class="font-14">ClassInfo</h5>
-                                <canvas id="classinfo-v-secondchoice-bar"></canvas>
-                            </div>
-                        </div>
-                        <!--// morris-bar-chart2 -->
-
-                        <div class="col-lg-6">
-                            <div class="mt-5">
-                                <h5 class="font-14">Subject</h5>
-                                <canvas id="subject-v-thirdchoice-bar"></canvas>
-                            </div>
-                        </div>
-                        <!--// morris-bar-chart3 -->
-
-                        <div class="col-lg-6">
-                            <div class="mt-5">
-                                <h5 class="font-14">Chapter</h5>
-                                <canvas id="chapter-v-forthchoice-bar"></canvas>
-                            </div>
-                        </div>
-                        <!--// morris-bar-chart4 -->
-
-                        <div class="col-lg-6">
-                            <div class="mt-5">
-                                <h5 class="font-14">Income Per Subject</h5>
-                                <canvas id="subject-v-income-bar"></canvas>
-                            </div>
-                        </div>
-                        <!--// morris-bar-chart6 -->
-
-
-
-                        <div class="col-lg-6">
-                            <div class="mt-5">
-                                <h5 class="font-14">Income Per Chapter</h5>
-                                <canvas id="chapter-v-income-bar"></canvas>
-                            </div>
-                        </div>
-                        <!--// morris-bar-chart7 -->
-
-
-
-
-                        <div class="col-lg-6">
-                            <div class="mt-5">
-                                <h5 class="font-14">Tuition Per Day</h5>
-                                <canvas id="tuition-v-date-line"></canvas>
-                            </div>
-                        </div>
-                        <!--// morris-line-chart -->
+                        <br />
+                        <hr style="background-color:blueviolet; height:1px;" />
+                        <hr style="background-color: blueviolet; height:1px;" />
+                        <br />
                     </div>
-                    <br />
-                    <!-- end row -->
-                    <!-- Teacher Withdraw Reqest -->
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card teacherWithdrawTable">
-                                <div class="card-header">
-                                    <h5>Withdraw Request</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-area">
-                                        <!-- table-responsive -->
-                                        <div class="table-responsive">
-                                            <table id="all_withdraw_list" class="table table-bordered">
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <!--end row -->
+
                 </div>
                 <br />
                 <!-- end container-fluid -->
@@ -247,7 +221,27 @@
     </div>
     <!-- END wrapper -->
     <!-- Vendor js -->
+
 </body>
 </html>
+
+@code{
+    List<TeacherWithdrawHistory> twh = new List<TeacherWithdrawHistory>();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        await GetWithdrawHistory();
+
+    }
+
+    public async Task GetWithdrawHistory()
+    {
+        var withdrawList = await "https://api.shikkhanobish.com/api/ShikkhanobishTeacher/getAllTeacherWithdrawHistory".PostJsonAsync(new { }).ReceiveJson<List<TeacherWithdrawHistory>>();
+        twh = withdrawList;
+    }
+}
+
 
 

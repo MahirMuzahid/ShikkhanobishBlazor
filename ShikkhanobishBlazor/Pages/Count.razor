@@ -99,37 +99,32 @@
                             <span> Count </span>
                         </a>
                     </li>
-                    <li>
-                        <a href="Student">
-                            <i class="fas fa-user-graduate"></i>
-                            <span> Student </span>
-                        </a>
-                    </li>
 
                     <li>
-                        <a href="Teacher">
-                            <i class="fas fa-user"></i>
-                            <span> Teacher </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="Question">
+                        <a href="Questions">
                             <i class="far fa-question-circle"></i>
                             <span> Question </span>
                         </a>
                     </li>
+
                     <li>
-                        <a href="Voucher">
-                            <i class="fas fa-fill-drip"></i>
-                            <span> Voucher </span>
+                        <a href="ActiveTeacher">
+                            <i class="fas fa-lightbulb"></i>
+                            <span> Active Teacher </span>
                         </a>
                     </li>
 
+                    <li>
+                        <a href="TeacherApproval">
+                            <i class="fas fa-user-alt"></i>
+                            <span> Teacher Approval </span>
+                        </a>
+                    </li>
 
                     <li>
-                        <a href="Add">
-                            <i class="fas fa-plus-square"></i>
-                            <span> Add </span>
+                        <a href="TeacherWithdraw">
+                            <i class="fas fa-money-bill-wave-alt"></i>
+                            <span> Teacher Withdraw </span>
                         </a>
                     </li>
                 </ul>
@@ -336,61 +331,13 @@
                     <!--end row -->
 
 
-                    <br />
-                    <hr style="background-color:crimson; height:10px;" />
-                    <br />
-
-                    <div class="">
-                        <label style="color:blueviolet;font-size:32px;">Active Teacher By Class Counting section</label>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-12">
-                            <div>
-                                <div class="card-box widget-inline">
-                                    <div class="row">
-                                        <div class="col-xl-4 col-sm-4 widget-inline-box">
-                                            <div class="text-center p-3">
-
-                                                <h2 class="mt-2"> <b>@activeTeacher8</b></h2>
-                                                <p class="text-muted mb-0">Class 8</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xl-4 col-sm-4 widget-inline-box">
-                                            <div class="text-center p-3">
-                                                <h2 class="mt-2"><b>@activeTeacher9and10</b></h2>
-                                                <p class="text-muted mb-0">Class 9&10</p>
-
-
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-sm-4 ">
-                                            <div class="text-center p-3">
-                                                <h2 class="mt-2"><b>@activeTeacher11and12</b></h2>
-                                                <p class="text-muted mb-0">Class 11&12</p>
-
-
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                    <br />
-                    <hr style="background-color:crimson; height:10px;" />
-                    <br />
+                    
 
 
 
                     <div class="form-group row">
                         <div class="col-12 align-content-center">
-                            <label style="color:blueviolet;font-size:32px;">Question Counting section</label>
+                            <label style="color:blueviolet;font-size:30px;">Question Counting section</label>
                         </div>
                     </div>
 
@@ -685,97 +632,7 @@
                     <hr style="background-color: blueviolet; height:1px;" />
                     <br />
 
-                    <br />
-                    <br />
-
-                    <br />
-                    <hr style="background-color:crimson; height:10px;" />
-                    <br />
-                    <div class="">
-                        <label style="color:blueviolet;font-size:32px;">Approval of Teacher Section </label>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-12">
-                            <div>
-                                <div class="card-box widget-inline">
-                                    <div class="row">
-                                        <div class="col-xl-3 col-sm-3 widget-inline-box">
-                                            <div class="text-center p-3">
-
-                                                <h2 class="mt-2"> <b>@totalQues</b></h2>
-                                                <p class="text-muted mb-0">Total Question</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xl-3 col-sm-3 widget-inline-box">
-                                            <div class="text-center p-3">
-                                                <h2 class="mt-2"><b>@approvedQues</b></h2>
-                                                <p class="text-muted mb-0">Approved</p>
-
-
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-3 col-sm-3 widget-inline-box">
-                                            <div class="text-center p-3">
-                                                <h2 class="mt-2"><b>@notapprovedQues</b></h2>
-                                                <p class="text-muted mb-0">Not Approved</p>
-
-
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-3 col-sm-3 ">
-                                            <div class="text-center p-3">
-                                                <h2 class="mt-2"><b>@pendingQues</b></h2>
-                                                <p class="text-muted mb-0">Pending</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <br />
-                    <hr style="background-color:blueviolet; height:1px;" />
-                    <hr style="background-color: blueviolet; height:1px;" />
-                    <br />
-                    <h5 style="color:blueviolet">Question Approval Count</h5>
-                    <div class="table-responsive">
-                        <table id="" class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>TeacherId</th>
-                                    <th>Approved</th>
-                                    <th>NotApproved</th>
-                                    <th>Pending</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @for (int i = 0; i < tqscResult.Count; i++)
-                                {
-                                    <tr>
-                                        <td>@tqscResult[i].teacherID</td>
-                                        <td>@tqscResult[i].approved</td>
-                                        <td>@tqscResult[i].notApproved</td>
-                                        <td>@tqscResult[i].pending</td>
-                                    </tr>
-                                }
-
-                            </tbody>
-
-
-                        </table>
-                    </div>
-                    <br />
-                    <hr style="background-color:blueviolet; height:1px;" />
-                    <hr style="background-color: blueviolet; height:1px;" />
-                    <br />
-
-                    <br />
-                    <hr style="background-color:crimson; height:10px;" />
-                    <br />
-
-
+                    
 
 
                 </div>
@@ -883,21 +740,11 @@
 
 
 
-    int countApproved;
-    int countNotApproved;
-    int countPending;
-    int teachID;
+    
 
 
-    int totalQues;
-    int approvedQues;
-    int notapprovedQues;
-    int pendingQues;
 
-
-    int activeTeacher8;
-    int activeTeacher9and10;
-    int activeTeacher11and12;
+    List<TeacherWithdrawHistory> twh = new List<TeacherWithdrawHistory>();
 
     List<TeacherQuestionStatusCount> tqscResult = new List<TeacherQuestionStatusCount>();
 
@@ -913,8 +760,8 @@
         await GetMonetizedTeacher();
         await GetQuestionCountByClass();
         await GetQuestionByGroupAndClass();
-        await GetTeacherQuestionHistory();
-        await GetActiveTeacherCount();
+        
+
 
     }
 
@@ -1381,263 +1228,6 @@
 
 
 
-
-    public async Task GetTeacherQuestionHistory()
-    {
-
-        int count1 = 0;
-        int count2 = 0;
-        int count3 = 0;
-
-        var thList = await "https://api.shikkhanobish.com/api/ShikkhanobishLogin/getTeacherQuestionHistory".GetJsonAsync<List<TecaherQuestionHistory>>();
-        var quesList = await "https://api.shikkhanobish.com/api/ShikkhanobishLogin/getQuestion".GetJsonAsync<List<Question>>();
-
-        List<int> teacherIDList = new List<int>();
-        List<int> uniqueTeacherID = new List<int>();
-        List<int> countList = new List<int>();
-
-        for (int i = 0; i < thList.Count; i++)
-        {
-            teacherIDList.Add(thList[i].teacherID);
-        }
-
-        for (int i = 0; i < teacherIDList.Count; i++)
-        {
-            bool isDone = false;
-
-            //check already counted
-            if (uniqueTeacherID.Count != 0)
-            {
-                for (int k = 0; k < uniqueTeacherID.Count; k++)
-                {
-                    if (uniqueTeacherID[k] == teacherIDList[i])
-                    {
-
-                        isDone = true;
-                    }
-                }
-            }
-
-
-
-            if (!isDone)
-            {
-                uniqueTeacherID.Add(teacherIDList[i]);
-                int num = 0;
-                for (int j = 0; j < teacherIDList.Count; j++)
-                {
-                    if (teacherIDList[i] == teacherIDList[j])
-                    {
-                        num++;
-                    }
-
-                }
-                countList.Add(num);
-
-
-            }
-
-        }
-        List<TeacherQuestionStatusCount> tqsc = new List<TeacherQuestionStatusCount>();
-        for (int i = 0; i < uniqueTeacherID.Count; i++)
-        {
-            TeacherQuestionStatusCount newtqsc = new TeacherQuestionStatusCount();
-            for (int j = 0; j < thList.Count; j++)
-            {
-                if (uniqueTeacherID[i]==thList[j].teacherID)
-                {
-                    newtqsc.teacherID = uniqueTeacherID[i];
-                    for (int k = 0; k < quesList.Count; k++)
-                    {
-                        if(thList[j].questionID == quesList[k].questionID)
-                        {
-                            if(quesList[k].review == 0)
-                            {
-                                newtqsc.pending++;
-                            }
-                            if (quesList[k].review == 1)
-                            {
-                                newtqsc.approved++;
-                            }
-                            if (quesList[k].review == 2)
-                            {
-                                newtqsc.notApproved++;
-                            }
-                            break;
-                        }
-                    }
-                }
-            }
-            tqsc.Add(newtqsc);
-        }
-        countApproved = count1;
-        tqscResult = tqsc;
-        for (int i = 0; i < tqsc.Count; i++)
-        {
-            count1 += tqsc[i].approved;
-            count2 += tqsc[i].notApproved;
-            count3 += tqsc[i].pending;
-        }
-        approvedQues = count1;
-        notapprovedQues = count2;
-        pendingQues = count3;
-        totalQues = count1 + count2 + count3;
-    }
-
-    public async Task GetActiveTeacherCount()
-    {
-        int count1=0;
-        int count2=0;
-        int count3 = 0;
-
-        var tList = await "https://api.shikkhanobish.com/api/ShikkhanobishTeacher/getAllTeacher".PostJsonAsync(new { }).ReceiveJson<List<Teachers>>();
-        var crsList = await "https://api.shikkhanobish.com/api/ShikkhanobishTeacher/getAllCousrList".PostJsonAsync(new { }).ReceiveJson<List<CousrList>>();
-        
-
-
-
-        for (int i = 0; i < tList.Count; i++)
-        {
-            for(int j=0; j < crsList.Count; j++)
-            {
-
-                if (tList[i].teacherID == crsList[j].teacherID && tList[i].activeStatus == 1)
-                {
-                    if (crsList[j].sub1 == 129 || crsList[j].sub1 == 130)
-                    {
-                        count1++;
-                    }
-                    if (crsList[j].sub2 == 129 || crsList[j].sub2 == 130)
-                    {
-                        count1++;
-                    }
-                    if (crsList[j].sub3 == 129 || crsList[j].sub3 == 130)
-                    {
-                        count1++;
-                    }
-                    if (crsList[j].sub4 == 129 || crsList[j].sub4 == 130)
-                    {
-                        count1++;
-                    }
-                    if (crsList[j].sub5 == 129 || crsList[j].sub5 == 130)
-                    {
-                        count1++;
-                    }
-                    if (crsList[j].sub6 == 129 || crsList[j].sub6 == 130)
-                    {
-                        count1++;
-                    }
-                    if (crsList[j].sub7 == 129 || crsList[j].sub7 == 130)
-                    {
-                        count1++;
-                    }
-                    if (crsList[j].sub8 == 129 || crsList[j].sub8 == 130)
-                    {
-                        count1++;
-                    }
-                    if (crsList[j].sub9 == 129 || crsList[j].sub9 == 130)
-                    {
-                        count1++;
-                    }
-                    if (crsList[j].sub10 == 129 || crsList[j].sub10 == 130)
-                    {
-                        count1++;
-                    }
-
-
-
-                    //Class 9&10
-                    if (crsList[j].sub1 == 101 || crsList[j].sub1 == 102 || crsList[j].sub1 == 103 || crsList[j].sub1 == 104 || crsList[j].sub1 == 105 || crsList[j].sub1 == 106 || crsList[j].sub1 == 107 || crsList[j].sub1 == 108 || crsList[j].sub1 == 109 || crsList[j].sub1 == 110)
-                    {
-                        count2++;
-                    }
-                    if (crsList[j].sub2 == 101 || crsList[j].sub2 == 102 || crsList[j].sub2 == 103 || crsList[j].sub2 == 104 || crsList[j].sub2 == 105 || crsList[j].sub2 == 106 || crsList[j].sub2 == 107 || crsList[j].sub2 == 108 || crsList[j].sub2 == 109 || crsList[j].sub2 == 110)
-                    {
-                        count2++;
-                    }
-                    if (crsList[j].sub3 == 101 || crsList[j].sub3 == 102 || crsList[j].sub3 == 103 || crsList[j].sub3 == 104 || crsList[j].sub3 == 105 || crsList[j].sub3 == 106 || crsList[j].sub3 == 107 || crsList[j].sub3 == 108 || crsList[j].sub3 == 109 || crsList[j].sub3 == 110)
-                    {
-                        count2++;
-                    }
-                    if (crsList[j].sub4 == 101 || crsList[j].sub4 == 102 || crsList[j].sub4 == 103 || crsList[j].sub4 == 104 || crsList[j].sub4 == 105 || crsList[j].sub4 == 106 || crsList[j].sub4 == 107 || crsList[j].sub4 == 108 || crsList[j].sub4 == 109 || crsList[j].sub4 == 110)
-                    {
-                        count2++;
-                    }
-                    if (crsList[j].sub5 == 101 || crsList[j].sub5 == 102 || crsList[j].sub5 == 103 || crsList[j].sub5 == 104 || crsList[j].sub5 == 105 || crsList[j].sub5 == 106 || crsList[j].sub5 == 107 || crsList[j].sub5 == 108 || crsList[j].sub5 == 109 || crsList[j].sub5 == 110)
-                    {
-                        count2++;
-                    }
-                    if (crsList[j].sub6 == 101 || crsList[j].sub6 == 102 || crsList[j].sub6 == 103 || crsList[j].sub6 == 104 || crsList[j].sub6 == 105 || crsList[j].sub6 == 106 || crsList[j].sub6 == 107 || crsList[j].sub6 == 108 || crsList[j].sub6 == 109 || crsList[j].sub6 == 110)
-                    {
-                        count2++;
-                    }
-                    if (crsList[j].sub7 == 101 || crsList[j].sub7 == 102 || crsList[j].sub7 == 103 || crsList[j].sub7 == 104 || crsList[j].sub7 == 105 || crsList[j].sub7 == 106 || crsList[j].sub7 == 107 || crsList[j].sub7 == 108 || crsList[j].sub7 == 109 || crsList[j].sub7 == 110)
-                    {
-                        count2++;
-                    }
-                    if (crsList[j].sub8 == 101 || crsList[j].sub8 == 102 || crsList[j].sub8 == 103 || crsList[j].sub8 == 104 || crsList[j].sub8 == 105 || crsList[j].sub8 == 106 || crsList[j].sub8 == 107 || crsList[j].sub8 == 108 || crsList[j].sub8 == 109 || crsList[j].sub8 == 110)
-                    {
-                        count2++;
-                    }
-                    if (crsList[j].sub9 == 101 || crsList[j].sub9 == 102 || crsList[j].sub9 == 103 || crsList[j].sub9 == 104 || crsList[j].sub9 == 105 || crsList[j].sub9 == 106 || crsList[j].sub9 == 107 || crsList[j].sub9 == 108 || crsList[j].sub9 == 109 || crsList[j].sub9 == 110)
-                    {
-                        count2++;
-                    }
-                    if (crsList[j].sub10 == 101 || crsList[j].sub10 == 102 || crsList[j].sub10 == 103 || crsList[j].sub10 == 104 || crsList[j].sub10 == 105 || crsList[j].sub10 == 106 || crsList[j].sub10 == 107 || crsList[j].sub10 == 108 || crsList[j].sub10 == 109 || crsList[j].sub10 == 110)
-                    {
-                        count2++;
-                    }
-
-
-                    //Class 11&12
-                    if (crsList[j].sub1 == 113 || crsList[j].sub1 == 114 || crsList[j].sub1 == 115 || crsList[j].sub1 == 116 && crsList[j].sub1 == 117 || crsList[j].sub1 == 118 && crsList[j].sub1 == 119 || crsList[j].sub1 == 120 || crsList[j].sub1 == 121 || crsList[j].sub1 == 122 || crsList[j].sub1 == 123 || crsList[j].sub1 == 124 || crsList[j].sub1 == 125 || crsList[j].sub1 == 126 || crsList[j].sub1 == 127 || crsList[j].sub1 == 128)
-                    {
-                        count3++;
-                    }
-                    if (crsList[j].sub2 == 113 || crsList[j].sub2 == 114 || crsList[j].sub2 == 115 || crsList[j].sub2 == 116 || crsList[j].sub2 == 117 || crsList[j].sub2 == 118 || crsList[j].sub2 == 119 || crsList[j].sub2 == 120 || crsList[j].sub2 == 121 || crsList[j].sub2 == 122 || crsList[j].sub1 == 123 || crsList[j].sub1 == 124 || crsList[j].sub1 == 125 || crsList[j].sub1 == 126 || crsList[j].sub1 == 127 || crsList[j].sub1 == 128)
-                    {
-                        count3++;
-                    }
-                    if (crsList[j].sub3 == 113 || crsList[j].sub3 == 114 || crsList[j].sub3 == 115 || crsList[j].sub3 == 116 || crsList[j].sub3 == 117 || crsList[j].sub3 == 118 || crsList[j].sub3 == 119 || crsList[j].sub3 == 120 || crsList[j].sub3 == 121 || crsList[j].sub3 == 122 || crsList[j].sub1 == 123 || crsList[j].sub1 == 124 || crsList[j].sub1 == 125 || crsList[j].sub1 == 126 || crsList[j].sub1 == 127 || crsList[j].sub1 == 128)
-                    {
-                        count3++;
-                    }
-                    if (crsList[j].sub4 == 113 || crsList[j].sub4 == 114 || crsList[j].sub4 == 115 || crsList[j].sub4 == 116 || crsList[j].sub4 == 117 || crsList[j].sub4 == 118 || crsList[j].sub4 == 119 || crsList[j].sub4 == 120 || crsList[j].sub4 == 121 || crsList[j].sub4 == 122 || crsList[j].sub1 == 123 || crsList[j].sub1 == 124 || crsList[j].sub1 == 125 || crsList[j].sub1 == 126 || crsList[j].sub1 == 127 || crsList[j].sub1 == 128)
-                    {
-                        count3++;
-                    }
-                    if (crsList[j].sub5 == 113 || crsList[j].sub5 == 114 || crsList[j].sub5 == 115 || crsList[j].sub5 == 116 || crsList[j].sub5 == 117 || crsList[j].sub5 == 118 || crsList[j].sub5 == 119 || crsList[j].sub5 == 120 || crsList[j].sub5 == 121 || crsList[j].sub5 == 122 || crsList[j].sub1 == 123 || crsList[j].sub1 == 124 || crsList[j].sub1 == 125 || crsList[j].sub1 == 126 || crsList[j].sub1 == 127 || crsList[j].sub1 == 128)
-                    {
-                        count3++;
-                    }
-                    if (crsList[j].sub6 == 113 || crsList[j].sub6 == 114 || crsList[j].sub6 == 115 || crsList[j].sub6 == 116 || crsList[j].sub6 == 117 || crsList[j].sub6 == 118 || crsList[j].sub6 == 119 || crsList[j].sub6 == 120 || crsList[j].sub6 == 121 || crsList[j].sub6 == 122 || crsList[j].sub1 == 123 || crsList[j].sub1 == 124 || crsList[j].sub1 == 125 || crsList[j].sub1 == 126 || crsList[j].sub1 == 127 || crsList[j].sub1 == 128)
-                    {
-                        count3++;
-                    }
-                    if (crsList[j].sub7 == 113 || crsList[j].sub7 == 114 || crsList[j].sub7 == 115 || crsList[j].sub7 == 116 || crsList[j].sub7 == 117 || crsList[j].sub7 == 118 || crsList[j].sub7 == 119 || crsList[j].sub7 == 120 || crsList[j].sub7 == 121 || crsList[j].sub7 == 122 || crsList[j].sub1 == 123 || crsList[j].sub1 == 124 || crsList[j].sub1 == 125 || crsList[j].sub1 == 126 || crsList[j].sub1 == 127 || crsList[j].sub1 == 128)
-                    {
-                        count3++;
-                    }
-                    if (crsList[j].sub8 == 113 || crsList[j].sub8 == 114 || crsList[j].sub8 == 115 || crsList[j].sub8 == 116 || crsList[j].sub8 == 117 || crsList[j].sub8 == 118 || crsList[j].sub8 == 119 || crsList[j].sub8 == 120 || crsList[j].sub8 == 121 || crsList[j].sub8 == 122 || crsList[j].sub1 == 123 || crsList[j].sub1 == 124 || crsList[j].sub1 == 125 || crsList[j].sub1 == 126 || crsList[j].sub1 == 127 || crsList[j].sub1 == 128)
-                    {
-                        count3++;
-                    }
-                    if (crsList[j].sub9 == 113 || crsList[j].sub9 == 114 || crsList[j].sub9 == 115 || crsList[j].sub9 == 116 || crsList[j].sub9 == 117 || crsList[j].sub9 == 118 || crsList[j].sub9 == 119 || crsList[j].sub9 == 120 || crsList[j].sub9 == 121 || crsList[j].sub9 == 122 || crsList[j].sub1 == 123 || crsList[j].sub1 == 124 || crsList[j].sub1 == 125 || crsList[j].sub1 == 126 || crsList[j].sub1 == 127 || crsList[j].sub1 == 128)
-                    {
-                        count3++;
-                    }
-                    if (crsList[j].sub10 == 113 || crsList[j].sub10 == 114 || crsList[j].sub10 == 115 || crsList[j].sub10 == 116 || crsList[j].sub10 == 117 || crsList[j].sub10 == 118 || crsList[j].sub10 == 119 || crsList[j].sub10 == 120 || crsList[j].sub10 == 121 || crsList[j].sub10 == 122 || crsList[j].sub1 == 123 || crsList[j].sub1 == 124 || crsList[j].sub1 == 125 || crsList[j].sub1 == 126 || crsList[j].sub1 == 127 || crsList[j].sub1 == 128)
-                    {
-                        count3++;
-                    }
-
-                }
-            }
-        }
-        activeTeacher8 = count1;
-        activeTeacher9and10 = count2;
-        activeTeacher11and12 = count3;
-    }
 
 
 }
