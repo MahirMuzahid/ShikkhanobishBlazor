@@ -1,6 +1,6 @@
 ﻿@using Flurl.Http;
 @using ShikkhanobishBlazor.Models
-@page "/Count"
+@page "/"
 
 
 <!DOCTYPE html>
@@ -88,13 +88,13 @@
                     <li class="menu-title">Navigation</li>
 
                     <li>
-                        <a href="">
+                        <a href="https://dashboard.shikkhanobish.com/index.html">
                             <i class="fas fa-home"></i>
                             <span> Dashboard </span>
                         </a>
                     </li>
                     <li>
-                        <a href="Count">
+                        <a href="/">
                             <i class="fas fa-calculator"></i>
                             <span> Count </span>
                         </a>
@@ -469,22 +469,18 @@
                             <table id="" class="table table-bordered">
                                 <thead>
                                     <tr>
-
+                                        <th>Accounting</th>
                                         <th>Finance</th>
                                         <th>Business Entrepreneurship</th>
                                         <th>General Science</th>
-                                        <th>Accounting</th>
-
-
-
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
+                                        <td>@countClass9and10Accounting</td>
                                         <td>@countClass9and10Finance</td>
                                         <td>@countClass9and10Entre</td>
                                         <td>@countClass9and10Science</td>
-                                        <td>@countClass9and10Accounting</td>
                                     </tr>
                                 </tbody>
 
@@ -503,10 +499,8 @@
                             <table id="" class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>Logic</th>
                                         <th>Economics</th>
-                                        <th>Geography</th>
-                                        <th>Civic</th>
+                                        <th>GeneralScience</th>
                                         <th>IT</th>
 
 
@@ -515,10 +509,8 @@
                                 <tbody>
 
                                     <tr>
-                                        <td>@countClass9and10Logic</td>
                                         <td>@countClass9and10Eco</td>
-                                        <td>@countClass9and10Geo</td>
-                                        <td>@countClass9and10Civic</td>
+                                        <td>@countClass9and10GS2</td>
                                         <td>@countClass9and10IT</td>
                                     </tr>
 
@@ -709,11 +701,8 @@
 
 
     int countClass9and10Eco;
+    int countClass9and10GS2;
     int countClass9and10IT;
-
-    int countClass9and10Logic;
-    int countClass9and10Geo;
-    int countClass9and10Civic;
 
 
 
@@ -740,7 +729,7 @@
 
 
 
-    
+
 
 
 
@@ -760,7 +749,7 @@
         await GetMonetizedTeacher();
         await GetQuestionCountByClass();
         await GetQuestionByGroupAndClass();
-        
+
 
 
     }
@@ -999,8 +988,7 @@
         int count111 = 0;
         int count222 = 0;
         int count333 = 0;
-        int count444 = 0;
-        int count555 = 0;
+   
 
 
 
@@ -1062,34 +1050,25 @@
 
 
                 //Arts
-                if (quesInfoList[i].classID == 101 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 125)
+                if (quesInfoList[i].classID == 101 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 110)
                 {
                     count111++;
                 }
 
 
-                if (quesInfoList[i].classID == 101 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 126)
+                if (quesInfoList[i].classID == 101 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 111)
                 {
                     count222++;
                 }
 
 
-                if (quesInfoList[i].classID == 101 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 127)
+                if (quesInfoList[i].classID == 101 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 112)
                 {
                     count333++;
                 }
 
 
-                if (quesInfoList[i].classID == 101 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 128)
-                {
-                    count444++;
-                }
 
-
-                if (quesInfoList[i].classID == 101 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 112)
-                {
-                    count555++;
-                }
 
 
             }
@@ -1111,11 +1090,10 @@
         countClass9and10Science = count33;
         countClass9and10Accounting = count44;
 
-        countClass9and10Logic = count111;
-        countClass9and10Eco = count222;
-        countClass9and10Geo = count333;
-        countClass9and10Civic = count444;
-        countClass9and10IT = count555;
+        countClass9and10Eco = count111;
+        countClass9and10GS2 = count222;
+        countClass9and10IT = count333;
+
 
 
 
