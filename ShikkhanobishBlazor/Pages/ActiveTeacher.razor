@@ -409,14 +409,14 @@
     protected override async Task OnInitializedAsync()
     {
 
-        await GetActiveTeacherCount();
+        await GetActiveTeacherCountByClass();
 
         await GetActiveTeacherCountBySubjects();
 
 
     }
 
-    public async Task GetActiveTeacherCount()
+    public async Task GetActiveTeacherCountByClass()
     {
         int count1 = 0;
         int count2 = 0;
@@ -435,6 +435,7 @@
 
                 if (tList[i].teacherID == crsList[j].teacherID && tList[i].activeStatus == 1)
                 {
+                    //class8
                     if (crsList[j].sub1 == 129 || crsList[j].sub2 == 129 || crsList[j].sub3 == 129 || crsList[j].sub4 == 129 || crsList[j].sub5 == 129 || crsList[j].sub6 == 129 || crsList[j].sub7 == 129 || crsList[j].sub8 == 129 || crsList[j].sub9 == 129 || crsList[j].sub10 == 129)
                     {
                         count1++;
@@ -604,11 +605,11 @@
     public async Task GetActiveTeacherCountBySubjects()
     {
 
-
+        //class8
         int countMath = 0;
         int countScience = 0;
 
-
+        //class9&10
         int countPhy = 0;
         int countChem = 0;
         int countBio = 0;
@@ -622,7 +623,7 @@
         int countGS2 = 0;
         int countIT = 0;
 
-
+        //class11&12
         int countPhy1 = 0;
         int countPhy2 = 0;
         int countChem1 = 0;
