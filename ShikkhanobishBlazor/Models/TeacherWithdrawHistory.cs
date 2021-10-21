@@ -16,5 +16,6 @@ namespace ShikkhanobishBlazor.Models
         public string phoneNumber { get; set; }
         public int status { get; set; }
         public string response { get; set; }
+        public string inputTrx { get; set; }
     }
 }

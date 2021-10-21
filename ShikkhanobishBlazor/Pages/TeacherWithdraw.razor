@@ -159,29 +159,30 @@
                                         <th>TeacherID</th>
                                         <th>PhoneNumber</th>
                                         <th>Status</th>
-                                        <th>Response</th>
                                         <th>InputTrxID</th>
+                                        <th>Response</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @for (int i = 0; i < twh.Count; i++)
+                                    @foreach(var thList in twh)
                                     {
                                     <tr>
-                                        <td>@twh[i].withdrawID</td>
-                                        <td>@twh[i].date</td>
-                                        <td>@twh[i].trxID</td>
-                                        <td>@twh[i].amountTaka</td>
-                                        <td>@twh[i].medium</td>
-                                        <td>@twh[i].teacherID</td>
-                                        <td>@twh[i].phoneNumber</td>
-                                        <td>@twh[i].status</td>
+                                        <td>@thList.withdrawID</td>
+                                        <td>@thList.date</td>
+                                        <td>@thList.trxID</td>
+                                        <td>@thList.amountTaka</td>
+                                        <td>@thList.medium</td>
+                                        <td>@thList.teacherID</td>
+                                        <td>@thList.phoneNumber</td>
+                                        <td>@thList.status</td>
+                                        <td><input type="text" @bind="thList.inputTrx" class="border border-purple" style="width:100px; padding:1px;margin-top:7px" /></td>
                                         <td>
-                                            <span style="width:100px;" class="btn btn-outline-purple">Accept</span>&nbsp;
-                                            <span style="width:100px;" class="btn btn-outline-purple">Decline</span>
+                                            <button style="width:100px;" class="btn btn-outline-purple" @onclick="@( async () => await acceptWithdraw(thList))">Accept</button>
 
                                         </td>
-                                      
-                                        <td><input type="text" class="border border-purple" style="width:100px; padding:1px;margin-top:7px" /></td>
+
+
                                     </tr>
                                     }
 
@@ -226,18 +227,37 @@
 
 @code{
     List<TeacherWithdrawHistory> twh = new List<TeacherWithdrawHistory>();
-
+    TeacherWithdrawHistory TeacherWithdrawHis = new TeacherWithdrawHistory();
 
     protected override async Task OnInitializedAsync()
     {
 
         await GetWithdrawHistory();
 
+
+    }
+
+    public async Task acceptWithdraw(TeacherWithdrawHistory teacher)
+    {
+        if(teacher.inputTrx != null || teacher.inputTrx != "")
+        {
+            var withdrawList = await "https://api.shikkhanobish.com/api/ShikkhanobishTeacher/getAllTeacherWithdrawHistory".PostJsonAsync(new
+            {
+                withdrawID = teacher.withdrawID,
+                trxID = teacher.inputTrx,
+                amountTaka = teacher.amountTaka,
+                teacherID = teacher.teacherID,
+                status = teacher.status
+
+            }).ReceiveJson<List<TeacherWithdrawHistory>>();
+        }
+
+        await GetWithdrawHistory();
     }
 
     public async Task GetWithdrawHistory()
     {
-        var withdrawList = await "https://api.shikkhanobish.com/api/ShikkhanobishTeacher/getAllTeacherWithdrawHistory".PostJsonAsync(new { }).ReceiveJson<List<TeacherWithdrawHistory>>();
+        var withdrawList = await "https://api.shikkhanobish.com/api/ShikkhanobishTeacher/getAllTeacherWithdrawHistory".PostJsonAsync(new {  }).ReceiveJson<List<TeacherWithdrawHistory>>();
         twh = withdrawList;
     }
 }
