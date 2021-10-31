@@ -1,5 +1,6 @@
 ﻿@using Flurl.Http;
 @using ShikkhanobishBlazor.Models
+@inject Blazored.LocalStorage.ILocalStorageService oLocalStore
 @page "/TeacherApproval"
 
 
@@ -28,13 +29,13 @@
                 <li class="dropdown notification-list">
                     <a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                         <img src="/images/images.png" alt="user-image" class="rounded-circle" />
-                        <span class="pro-user-name ml-1"> Maxine K <i class="mdi mdi-chevron-down"></i> </span>
+                        <span class="pro-user-name ml-1"> @userName<i class="mdi mdi-chevron-down"></i> </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right profile-dropdown">
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item">
                             <i class="mdi mdi-logout-variant"></i>
-                            <span>Logout</span>
+                            <span @onclick="Logout">Logout</span>
                         </a>
                     </div>
                 </li>
@@ -78,7 +79,7 @@
                     <img src="/images/images.png" alt="" class="avatar-md rounded-circle" />
                 </div>
                 <div class="user-info">
-                    <a href="#">Maxine K</a>
+                    <a href="#">@userName</a>
                 </div>
             </div>
 
@@ -94,7 +95,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/">
+                        <a href="Count">
                             <i class="fas fa-calculator"></i>
                             <span> Count </span>
                         </a>
@@ -142,9 +143,9 @@
 
                 <!-- Start container-fluid -->
                 <div class="container-fluid">
-                    
 
-                    
+
+
 
                     <br />
                     <hr style="background-color:crimson; height:10px;" />
@@ -278,19 +279,38 @@
     int pendingQues;
 
 
-
+    public string userName { get; set; }
+    public string pass { get; set; }
 
 
     List<TeacherQuestionStatusCount> tqscResult = new List<TeacherQuestionStatusCount>();
 
     protected override async Task OnInitializedAsync()
     {
-   
-        await GetTeacherQuestionHistory();
 
+        await GetTeacherQuestionHistory();
+        await GetLoginInfo();
+        userName = await oLocalStore.GetItemAsync<string>("name");
+        pass = await oLocalStore.GetItemAsync<string>("passWord");
 
     }
 
+    public async Task GetLoginInfo()
+    {
+        if (userName == "" && pass == "")
+        {
+            string redirectURL = "/";
+            nvi.NavigateTo(redirectURL);
+        }
+    }
+    [Inject]
+    public NavigationManager nvi { get; set; }
+    public async Task Logout()
+    {
+        await oLocalStore.ClearAsync();
+        string redirectURL = "/";
+        nvi.NavigateTo(redirectURL);
+    }
 
 
 
@@ -356,14 +376,14 @@
             TeacherQuestionStatusCount newtqsc = new TeacherQuestionStatusCount();
             for (int j = 0; j < thList.Count; j++)
             {
-                if (uniqueTeacherID[i]==thList[j].teacherID)
+                if (uniqueTeacherID[i] == thList[j].teacherID)
                 {
                     newtqsc.teacherID = uniqueTeacherID[i];
                     for (int k = 0; k < quesList.Count; k++)
                     {
-                        if(thList[j].questionID == quesList[k].questionID)
+                        if (thList[j].questionID == quesList[k].questionID)
                         {
-                            if(quesList[k].review == 0)
+                            if (quesList[k].review == 0)
                             {
                                 newtqsc.pending++;
                             }

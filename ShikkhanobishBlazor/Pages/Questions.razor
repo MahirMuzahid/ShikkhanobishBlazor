@@ -1,5 +1,6 @@
 ﻿@page "/Questions"
 @using ShikkhanobishBlazor.Models
+@inject Blazored.LocalStorage.ILocalStorageService oLocalStore
 @using Flurl.Http;
 
 
@@ -29,13 +30,13 @@
                 <li class="dropdown notification-list">
                     <a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                         <img src="/images/images.png" alt="user-image" class="rounded-circle" />
-                        <span class="pro-user-name ml-1"> Maxine K <i class="mdi mdi-chevron-down"></i> </span>
+                        <span class="pro-user-name ml-1"> @userName <i class="mdi mdi-chevron-down"></i> </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right profile-dropdown">
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item">
                             <i class="mdi mdi-logout-variant"></i>
-                            <span>Logout</span>
+                            <span @onclick="Logout">Logout</span>
                         </a>
                     </div>
                 </li>
@@ -78,7 +79,7 @@
                     <img src="/images/images.png" alt="" class="avatar-md rounded-circle" />
                 </div>
                 <div class="user-info">
-                    <a href="#">Jones</a>
+                    <a href="#">@userName</a>
                 </div>
             </div>
 
@@ -175,20 +176,20 @@
                                                     @foreach (var item in objList)
                                                     {
 
-                                                    <tr>
-                                                        <td>@item.questionID</td>
-                                                        <td>@item.classID</td>
-                                                        <td>@item.subjectID</td>
-                                                        <td>@item.chapterID</td>
-                                                        <td>@item.topicID</td>
-                                                        <td>@item.mainQuestion</td>
-                                                        <td>@item.option1</td>
-                                                        <td>@item.option2</td>
-                                                        <td>@item.option3</td>
-                                                        <td>@item.option4</td>
-                                                        <td>@item.rightAnswer</td>
-                                                        <td>@item.review</td>
-                                                    </tr>
+                                                        <tr>
+                                                            <td>@item.questionID</td>
+                                                            <td>@item.classID</td>
+                                                            <td>@item.subjectID</td>
+                                                            <td>@item.chapterID</td>
+                                                            <td>@item.topicID</td>
+                                                            <td>@item.mainQuestion</td>
+                                                            <td>@item.option1</td>
+                                                            <td>@item.option2</td>
+                                                            <td>@item.option3</td>
+                                                            <td>@item.option4</td>
+                                                            <td>@item.rightAnswer</td>
+                                                            <td>@item.review</td>
+                                                        </tr>
                                                     }
                                                 </tbody>
 
@@ -233,15 +234,39 @@
 </html>
 
 @code{
+
+    public string userName { get; set; }
+    public string pass { get; set; }
     List<Models.Question> objList = new List<Models.Question>();
 
     protected override async Task OnInitializedAsync()
     {
         await GetQuestion();
+        await GetLoginInfo();
+        userName = await oLocalStore.GetItemAsync<string>("name");
+        pass = await oLocalStore.GetItemAsync<string>("passWord");
     }
+    public async Task GetLoginInfo()
+    {
+        if (userName == "" && pass == "")
+        {
+            string redirectURL = "/";
+            nvi.NavigateTo(redirectURL);
+        }
+    }
+    [Inject]
+    public NavigationManager nvi { get; set; }
+    public async Task Logout()
+    {
+        await oLocalStore.ClearAsync();
+        string redirectURL = "/";
+        nvi.NavigateTo(redirectURL);
+    }
+
     public async Task GetQuestion()
     {
         objList = await "https://api.shikkhanobish.com/api/ShikkhanobishLogin/getQuestion".GetJsonAsync<List<Models.Question>>();
+        userName = await oLocalStore.GetItemAsync<string>("name");
 
     }
 }

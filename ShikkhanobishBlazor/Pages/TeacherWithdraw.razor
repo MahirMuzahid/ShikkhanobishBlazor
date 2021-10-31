@@ -1,6 +1,6 @@
 ﻿@using ShikkhanobishBlazor.Models
 @using Flurl.Http
-
+@inject Blazored.LocalStorage.ILocalStorageService oLocalStore
 @page "/TeacherWithdraw"
 
 <!DOCTYPE html>
@@ -27,13 +27,13 @@
                 <li class="dropdown notification-list">
                     <a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                         <img src="/images/images.png" alt="user-image" class="rounded-circle" />
-                        <span class="pro-user-name ml-1"> Maxine K <i class="mdi mdi-chevron-down"></i> </span>
+                        <span class="pro-user-name ml-1"> @userName <i class="mdi mdi-chevron-down"></i> </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right profile-dropdown">
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item">
                             <i class="mdi mdi-logout-variant"></i>
-                            <span>Logout</span>
+                            <span @onclick="Logout">Logout</span>
                         </a>
                     </div>
                 </li>
@@ -77,7 +77,7 @@
                     <img src="/images/images.png" alt="" class="avatar-md rounded-circle" />
                 </div>
                 <div class="user-info">
-                    <a href="#">Maxine K</a>
+                    <a href="#">@userName</a>
                 </div>
             </div>
 
@@ -93,7 +93,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/">
+                        <a href="Count">
                             <i class="fas fa-calculator"></i>
                             <span> Count </span>
                         </a>
@@ -165,25 +165,24 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach(var thList in twh)
+                                    @foreach (var thList in twh)
                                     {
-                                    <tr>
-                                        <td>@thList.withdrawID</td>
-                                        <td>@thList.date</td>
-                                        <td>@thList.trxID</td>
-                                        <td>@thList.amountTaka</td>
-                                        <td>@thList.medium</td>
-                                        <td>@thList.teacherID</td>
-                                        <td>@thList.phoneNumber</td>
-                                        <td>@thList.status</td>
-                                        <td><input type="text" @bind="thList.inputTrx" class="border border-purple" style="width:100px; padding:1px;margin-top:7px" /></td>
-                                        <td>
-                                            <button style="width:100px;" class="btn btn-outline-purple" @onclick="@( async () => await acceptWithdraw(thList))">Accept</button>
+                                        <tr>
+                                            <td>@thList.withdrawID</td>
+                                            <td>@thList.date</td>
+                                            <td>@thList.trxID</td>
+                                            <td>@thList.amountTaka</td>
+                                            <td>@thList.medium</td>
+                                            <td>@thList.teacherID</td>
+                                            <td>@thList.phoneNumber</td>
+                                            <td>@thList.status</td>
+                                            <td><input type="text" @bind="thList.inputTrx" class="border border-purple" style="width:100px; padding:1px;margin-top:7px" /></td>
+                                            <td>
+                                                <button style="width:100px;" class="btn btn-outline-purple" @onclick="@( async () => await acceptWithdraw(thList))">Accept</button>
+                                            </td>
 
-                                        </td>
 
-
-                                    </tr>
+                                        </tr>
                                     }
 
                                 </tbody>
@@ -229,17 +228,40 @@
     List<TeacherWithdrawHistory> twh = new List<TeacherWithdrawHistory>();
     TeacherWithdrawHistory TeacherWithdrawHis = new TeacherWithdrawHistory();
 
+    public string userName { get; set; }
+    public string pass { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
 
         await GetWithdrawHistory();
+        await GetLoginInfo();
+        userName = await oLocalStore.GetItemAsync<string>("name");
+        pass = await oLocalStore.GetItemAsync<string>("passWord");
 
+    }
 
+    public async Task GetLoginInfo()
+    {
+        if (userName == "" && pass == "")
+        {
+            string redirectURL = "/";
+            nvi.NavigateTo(redirectURL);
+        }
+    }
+
+    [Inject]
+    public NavigationManager nvi { get; set; }
+    public async Task Logout()
+    {
+        await oLocalStore.ClearAsync();
+        string redirectURL = "/";
+        nvi.NavigateTo(redirectURL);
     }
 
     public async Task acceptWithdraw(TeacherWithdrawHistory teacher)
     {
-        if(teacher.inputTrx != null || teacher.inputTrx != "")
+        if (teacher.inputTrx != null || teacher.inputTrx != "")
         {
             var withdrawList = await "https://api.shikkhanobish.com/api/ShikkhanobishTeacher/getAllTeacherWithdrawHistory".PostJsonAsync(new
             {
@@ -257,7 +279,7 @@
 
     public async Task GetWithdrawHistory()
     {
-        var withdrawList = await "https://api.shikkhanobish.com/api/ShikkhanobishTeacher/getAllTeacherWithdrawHistory".PostJsonAsync(new {  }).ReceiveJson<List<TeacherWithdrawHistory>>();
+        var withdrawList = await "https://api.shikkhanobish.com/api/ShikkhanobishTeacher/getAllTeacherWithdrawHistory".PostJsonAsync(new { }).ReceiveJson<List<TeacherWithdrawHistory>>();
         twh = withdrawList;
     }
 }
