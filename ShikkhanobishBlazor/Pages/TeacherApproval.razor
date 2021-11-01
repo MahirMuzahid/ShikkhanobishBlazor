@@ -4,6 +4,7 @@
 @page "/TeacherApproval"
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -178,13 +179,59 @@
                         </div>
                     </div>
                     <br />
-                    <hr style="background-color:blueviolet; height:1px;" />
-                    <hr style="background-color: blueviolet; height:1px;" />
+
+
+                    <br />
+                    <hr style="background-color:crimson; height:10px;" />
+                    <br />
+                    <div class="">
+                        <label style="color:blueviolet;font-size:30px;">Pending Questions </label>
+                    </div>
+                    <div class="table-responsive">
+                        <table id="" class="table table-bordered" style="text-align:center;">
+                            <thead style="color: black; font-weight: bold">
+                                <tr>
+                                    <th>Question</th>
+                                    <th>Option1</th>
+                                    <th>Option2</th>
+                                    <th>Option3</th>
+                                    <th>Option4</th>
+                                    <th>Response</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in qList)
+                                {
+                                    <tr>
+                                        <td>@item.mainQuestion</td>
+                                        <td>@item.option1</td>
+                                        <td>@item.option2</td>
+                                        <td>@item.option3</td>
+                                        <td>@item.option4</td>
+
+                                        <td>
+                                            <button style="width:100px; background-color:@item.appBackColor; color: black;font-weight:bold" class="btn btn-outline-success" @onclick="@( async () => await acceptPendingQues(item))">Accept</button>&nbsp;
+                                            <button style="width:100px; background-color:@item.decBackColor; color: black;font-weight:bold" class=" btn btn-outline-danger" @onclick="@( async () => await declinePendingQues(item))">Decline</button>
+                                        </td>
+                                    </tr>
+
+                                }
+
+                            </tbody>
+
+
+                        </table>
+                    </div>
+                    <button style="width:200px;  color: white;font-weight:bold" class=" btn btn-primary" @onclick="@SubmitPendingQues">Submit</button>
+
+                    <br />
+                    <hr style="background-color:crimson; height:10px;" />
+
                     <br />
                     <h5 style="color:blueviolet">Question Approval Count</h5>
                     <div class="table-responsive">
-                        <table id="" class="table table-bordered" style="text-align:center">
-                            <thead>
+                        <table id="" class="table table-bordered" style="text-align:center; ">
+                            <thead style="color: black; font-weight: bold">
                                 <tr>
                                     <th>TeacherId</th>
                                     <th>Approved</th>
@@ -200,6 +247,7 @@
                                         <td>@tqscResult[i].approved</td>
                                         <td>@tqscResult[i].notApproved</td>
                                         <td>@tqscResult[i].pending</td>
+
                                     </tr>
                                 }
 
@@ -208,10 +256,7 @@
 
                         </table>
                     </div>
-                    <br />
-                    <hr style="background-color:blueviolet; height:1px;" />
-                    <hr style="background-color: blueviolet; height:1px;" />
-                    <br />
+
 
                     <br />
                     <hr style="background-color:crimson; height:10px;" />
@@ -261,12 +306,14 @@
     int notapprovedQues;
     int pendingQues;
 
-
+    List<int> acceptedQS = new List<int>();
+    List<int> declineQS = new List<int>();
     public string userName { get; set; }
     public string pass { get; set; }
-
+    List<TecaherQuestionHistory> tqhl = new List<TecaherQuestionHistory>();
 
     List<TeacherQuestionStatusCount> tqscResult = new List<TeacherQuestionStatusCount>();
+    List<Question> qList = new List<Question>();
 
     protected override async Task OnInitializedAsync()
     {
@@ -296,6 +343,42 @@
     }
 
 
+    public async Task acceptPendingQues(Question ques)
+    {
+        List<Question> newqs = new List<Question>();
+        for(int i =0; i < qList.Count; i++)
+        {
+            if(ques.questionID == qList[i].questionID)
+            {
+                qList[i].review = 1;
+                qList[i].appBackColor = "#0BD47A";
+                qList[i].decBackColor = "#FFFFFF";
+
+                //acceptedQS.Add(ques.questionID);
+            }
+            newqs.Add(qList[i]);
+        }
+        qList.Clear();
+        qList = newqs;
+    }
+    public async Task declinePendingQues(Question ques)
+    {
+        List<Question> newqs = new List<Question>();
+        for (int i = 0; i < qList.Count; i++)
+        {
+            if (ques.questionID == qList[i].questionID)
+            {
+                qList[i].review = 2;
+                qList[i].appBackColor = "#FFFFFF";
+                qList[i].decBackColor = "#F40A26";
+
+                //acceptedQS.Add(ques.questionID);
+            }
+            newqs.Add(qList[i]);
+        }
+        qList.Clear();
+        qList = newqs;
+    }
 
     public async Task GetTeacherQuestionHistory()
     {
@@ -306,6 +389,20 @@
 
         var thList = await "https://api.shikkhanobish.com/api/ShikkhanobishLogin/getTeacherQuestionHistory".GetJsonAsync<List<TecaherQuestionHistory>>();
         var quesList = await "https://api.shikkhanobish.com/api/ShikkhanobishLogin/getQuestion".GetJsonAsync<List<Question>>();
+
+        tqhl = thList;
+
+        for(int i =0; i < quesList.Count; i++)
+        {
+            if(quesList[i].review == 0)
+            {
+                quesList[i].appBackColor = "#FFFFFF";
+                quesList[i].decBackColor = "#FFFFFF";
+                qList.Add(quesList[i]);
+            }
+        }
+
+        //qList = quesList;
 
         List<int> teacherIDList = new List<int>();
         List<int> uniqueTeacherID = new List<int>();
@@ -397,11 +494,69 @@
         notapprovedQues = count2;
         pendingQues = count3;
         totalQues = count1 + count2 + count3;
+
+
+    }
+
+    public async Task MakeAcceptQuestion(Question qs)
+    {
+        for (int i = 0; i < tqhl.Count; i++)
+        {
+            if (tqhl[i].questionID == qs.questionID)
+            {
+                var res = await "https://api.shikkhanobish.com/api/ShikkhanobishLogin/approveOrDisapprovedQuestino".PostUrlEncodedAsync(new
+                {
+                    questionID = qs.questionID,
+                    review = 1
+                })
+         .ReceiveJson<Response>();
+                var res1 = await "https://api.shikkhanobish.com/api/ShikkhanobishTeacher/addTeacherAmountPerqs".PostUrlEncodedAsync(new
+                {
+                    teacherID = tqhl[i].teacherID
+                })
+         .ReceiveJson<Response>();
+
+                break;
+            }
+        }
+
+    }
+    public async Task MakeDeclineQuestion(Question qs)
+    {
+        var res = await "https://api.shikkhanobish.com/api/ShikkhanobishLogin/approveOrDisapprovedQuestino".PostUrlEncodedAsync(new
+        {
+            questionID = qs.questionID,
+            review = 2
+        })
+      .ReceiveJson<Response>();
+    }
+
+    public void SubmitPendingQues()
+    {
+        Submit();
+    }
+
+
+    public async Task Submit()
+    {
+        for (int i = 0; i < qList.Count; i++)
+        {
+            if (qList[i].review == 1)
+            {
+                await MakeAcceptQuestion(qList[i]);
+            }
+            if (qList[i].review == 2)
+            {
+                await MakeDeclineQuestion(qList[i]);
+            }
+        }
     }
 
 
 
 }
+
+
 
 
 

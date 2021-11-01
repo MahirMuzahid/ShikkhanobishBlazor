@@ -54,12 +54,23 @@
     <component type="typeof(App)" render-mode="ServerPrerendered" />
 
     <div id="blazor-error-ui">
-      
+
     </div>
 
     <script src="_framework/blazor.server.js"></script>
-   
+
 
 
 </body>
 </html>
+<style>
+    .colorChanged {
+        background: none;
+    }
+</style>
+
+<script>
+    $("#button").click(function () {
+        $("#button").addClass('colorChanged');
+    });
+</script>
