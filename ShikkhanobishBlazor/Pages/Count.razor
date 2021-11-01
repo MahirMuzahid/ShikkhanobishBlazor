@@ -22,9 +22,17 @@
 
     <!-- Begin page -->
     <div id="wrapper">
+        <!-- LOGO -->
+            <div class="logo-box mt-2 m-0 ml-0">
+                <a href="Count" class="">
 
+                    <img src="/images/snImg.jpg" style="display: block; margin-left: auto; margin-right: auto; width: 50px;height:50px;">
+
+                </a>
+            </div>
         <!-- Topbar Start -->
         <div class="navbar-custom">
+            
             <ul class="list-unstyled topnav-menu float-right mb-0">
                 <li class="dropdown notification-list">
                     <a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
@@ -41,27 +49,7 @@
                 </li>
             </ul>
 
-            <!-- LOGO -->
-            <div class="logo-box">
-                <a href="Index" class="logo text-center logo-dark">
-                    <span class="logo-lg">
-                        <img src="/images/logo1.png" alt="" height="50" />
-                    </span>
 
-                    <span class="logo-sm">
-                        <img src="/images/logo1.png" alt="" height="22" />
-                    </span>
-                </a>
-
-                <a href="Index" class="logo text-center logo-light">
-                    <span class="logo-lg">
-                        <img src="/images/logo1.png" alt="" height="50" />
-                    </span>
-                    <span class="logo-sm">
-                        <img src="/images/logo1.png" alt="" height="22" />
-                    </span>
-                </a>
-            </div>
 
             <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
                 <li>
@@ -87,7 +75,6 @@
             <div id="sidebar-menu">
                 <ul class="metismenu" id="side-menu">
                     <li class="menu-title">Navigation</li>
-
                     <li>
                         <a href="https://dashboard.shikkhanobish.com/index.html">
                             <i class="fas fa-home"></i>
@@ -95,12 +82,11 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/">
+                        <a href="Count">
                             <i class="fas fa-calculator"></i>
                             <span> Count </span>
                         </a>
                     </li>
-
                     <li>
                         <a href="Questions">
                             <i class="far fa-question-circle"></i>
@@ -750,9 +736,6 @@
         await GetLoginInfo();
         userName = await oLocalStore.GetItemAsync<string>("name");
         pass = await oLocalStore.GetItemAsync<string>("passWord");
-
-
-
     }
 
     public async Task GetLoginInfo()
