@@ -1,0 +1,293 @@
+﻿@using Flurl.Http;
+@using ShikkhanobishBlazor.Models
+@inject Blazored.LocalStorage.ILocalStorageService oLocalStore
+@page "/SendMessage"
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Responsive bootstrap 4 admin template" name="description" />
+    <meta content="Coderthemes" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+
+</head>
+
+<body>
+
+    <!-- Begin page -->
+    <div id="wrapper">
+        <!-- LOGO -->
+        <div class="logo-box mt-2 m-0 ml-0">
+            <a href="Count" class="">
+
+                <img src="/images/snImg.jpg" style="display: block; margin-left: auto; margin-right: auto; width: 50px;height:50px;">
+
+            </a>
+        </div>
+        <!-- Topbar Start -->
+        <div class="navbar-custom">
+            <ul class="list-unstyled topnav-menu float-right mb-0">
+                <li class="dropdown notification-list">
+                    <a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                        <img src="/images/images.png" alt="user-image" class="rounded-circle" />
+                        <span class="pro-user-name ml-1"> <i class="mdi mdi-chevron-down"></i> </span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right profile-dropdown">
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <i class="mdi mdi-logout-variant"></i>
+                            <span>Logout</span>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
+                <li>
+                    <button class="button-menu-mobile">
+                        <i class="mdi mdi-menu"></i>
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <!-- end Topbar -->
+        <!-- Left Sidebar Start  -->
+        <div class="left-side-menu">
+            <div class="user-box">
+                <div class="float-left">
+                    <img src="/images/images.png" alt="" class="avatar-md rounded-circle" />
+                </div>
+                <div class="user-info">
+                    <a href="#"></a>
+                </div>
+            </div>
+
+            <!--- Sidemenu -->
+            <div id="sidebar-menu">
+                <ul class="metismenu" id="side-menu">
+                    <li class="menu-title">Navigation</li>
+                    <li>
+                        <a href="https://dashboard.shikkhanobish.com/index.html">
+                            <i class="fas fa-home"></i>
+                            <span> Dashboard </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Count">
+                            <i class="fas fa-calculator"></i>
+                            <span> Count </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Questions">
+                            <i class="far fa-question-circle"></i>
+                            <span> Question </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="TeacherApproval">
+                            <i class="fas fa-user-alt"></i>
+                            <span> Teacher Qn. Approval </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ActiveTeacher">
+                            <i class="fas fa-lightbulb"></i>
+                            <span> Active Teacher </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="TeacherWithdraw">
+                            <i class="fas fa-money-bill-wave-alt"></i>
+                            <span> Teacher Withdraw </span>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- End Sidebar -->
+
+            <div class="clearfix"></div>
+        </div>
+        <!-- Left Sidebar End -->
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+
+        <div class="content-page">
+            <div class="content">
+
+                <!-- Start container-fluid -->
+                <div class="container-fluid">
+
+                    <div class="">
+                        <label style="color:black;font-size:25px">Send  Message To Student</label>
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <textarea class="form-control " style="height:250px"></textarea>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="form-group row">
+                            <div class="col-md- ">
+                                <select class="form-control btn btn-purple" id="Name">
+                                    <option style="" value="">-- Select Student --</option>
+
+                                    <option value=""></option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="col-md- ">
+                                <label style="padding: 3px;margin-left:3px; color: black; font-weight: bold; font-size: 18px; height: 20px;">/</label>
+                                <button class="btn btn-outline-success ">Send</button>
+                                <label style="padding: 3px; color: black; font-weight: bold; font-size: 18px; height: 20px;">/</label>
+                                <button class="btn btn-outline-success ">SendAllStudent</button>
+                            </div>
+                        </div>
+                        <br />
+
+
+                        <div class="form-group row p-1">
+                            <div class="col-md-8" style="border:2px">
+                                <div class="form-group row">
+                                    <div class="col-md-1">
+                                        <label style="color:black">Name</label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label style="color:black">PhoneNumber</label>
+                                    </div>
+                                </div>
+
+
+                                <div class=" form-group row">
+                                    <div class=" col-md-6">
+                                        <textarea class="form-control" readonly style="height:250px"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <br />
+                    <hr style="height: 5px; background-color: #E2089C " />
+                    <br />
+
+                    <div class="">
+                        <label style="color:black;font-size:25px">Send  Message To Teacher</label>
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <textarea class="form-control " style="height:250px"></textarea>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="form-group row">
+                            <div class="col-md- ">
+                                <select class="form-control btn btn-purple" id="Name">
+                                    <option style="" value="">-- Select Teacher --</option>
+
+                                    <option value=""></option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="col-md- ">
+                                <label style="padding: 3px; margin-left: 3px; color: black; font-weight: bold; font-size: 18px; height: 20px;">/</label>                      
+                                <button class="btn btn-outline-success ">SendOnlySelected</button>
+                                <label style="padding: 3px; color: black; font-weight: bold; font-size: 18px; height: 20px;">/</label>
+                                <button class="btn btn-outline-success ">SendMonetized</button>
+                                <label style="padding: 3px; color: black; font-weight: bold; font-size: 18px; height: 20px;">/</label>
+                                <button class="btn btn-outline-success ">SendNotMonetized</button>
+                            </div>
+                        </div>
+                        <br />
+
+
+                        <div class="form-group row p-1">
+                            <div class="col-md-8" style="border:2px">
+                                <div class="form-group row">
+                                    <div class="col-md-1">
+                                        <label style="color:black">Name</label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label style="color:black">PhoneNumber</label>
+                                    </div>
+                                </div>
+
+                                <div class=" form-group row">
+                                    <div class=" col-md-6">
+                                        <textarea class="form-control" readonly style="height:250px"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <!-- end container-fluid -->
+                <!-- Footer Start -->
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                2021 &copy; shikkhanobish
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+                <!-- end Footer -->
+            </div>
+            <!-- end content -->
+
+        </div>
+        <!-- END content-page -->
+
+    </div>
+    <!-- END wrapper -->
+    <!-- Vendor js -->
+</body>
+</html>
+
+
+@code{
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
