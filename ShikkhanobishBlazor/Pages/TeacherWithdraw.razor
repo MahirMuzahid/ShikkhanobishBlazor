@@ -1,21 +1,19 @@
-﻿@page "/Questions"
-@using ShikkhanobishBlazor.Models
+﻿@using ShikkhanobishBlazor.Models
+@using Flurl.Http
 @inject Blazored.LocalStorage.ILocalStorageService oLocalStore
-@using Flurl.Http;
-
-
+@page "/TeacherWithdraw"
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8" />
-    <title>Question</title>
+    <title>TeacherWithdraw</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Responsive bootstrap 4 admin template" name="description" />
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
+    <link href="~/css/makeQues.css" />
 </head>
 
 <body>
@@ -30,7 +28,6 @@
 
             </a>
         </div>
-
         <!-- Topbar Start -->
         <div class="navbar-custom">
             <ul class="list-unstyled topnav-menu float-right mb-0">
@@ -48,8 +45,6 @@
                     </div>
                 </li>
             </ul>
-
-           
 
             <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
                 <li>
@@ -122,77 +117,66 @@
         <!-- Start Page Content here -->
         <!-- ============================================================== -->
 
+
         <div class="content-page">
             <div class="content">
 
                 <!-- Start container-fluid -->
                 <div class="container-fluid">
 
-                    <!-- Teacher -->
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="card studentTable">
-                                <div class="card-header">
-                                    <h5>Question</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-area">
-                                        <!-- table-responsive -->
-                                        <div class="table-responsive">
-                                            <table id="all_question_datatable" class="table table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th>questionID</th>
-                                                        <th>classID</th>
-                                                        <th>subjectID</th>
-                                                        <th>chapterID</th>
-                                                        <th>topicID</th>
-                                                        <th>mainQuestion</th>
-                                                        <th>option1</th>
-                                                        <th>option2</th>
-                                                        <th>option3</th>
-                                                        <th>option4</th>
-                                                        <th>rightAnswer</th>
-                                                        <th>noOfQs</th>
-                                                    </tr>
-                                                </thead>
+                        <div class="table-responsive">
+                            <table id="" class="table table-bordered" style="text-align:center">
+                                <thead>
+                                    <tr>
+                                        <th>WithdrawID</th>
+                                        <th>Date</th>
+                                        <th>TrxID</th>
+                                        <th>AmountTaka</th>
+                                        <th>Medium</th>
+                                        <th>TeacherID</th>
+                                        <th>PhoneNumber</th>
+                                        <th>Status</th>
+                                        <th>InputTrxID</th>
+                                        <th>Response</th>
 
-                                                <tbody>
-
-                                                    @foreach (var item in objList)
-                                                    {
-
-                                                        <tr>
-                                                            <td>@item.questionID</td>
-                                                            <td>@item.classID</td>
-                                                            <td>@item.subjectID</td>
-                                                            <td>@item.chapterID</td>
-                                                            <td>@item.topicID</td>
-                                                            <td>@item.mainQuestion</td>
-                                                            <td>@item.option1</td>
-                                                            <td>@item.option2</td>
-                                                            <td>@item.option3</td>
-                                                            <td>@item.option4</td>
-                                                            <td>@item.rightAnswer</td>
-                                                            <td>@item.review</td>
-                                                        </tr>
-                                                    }
-                                                </tbody>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var thList in twh)
+                                    {
+                                        <tr>
+                                            <td>@thList.withdrawID</td>
+                                            <td>@thList.date</td>
+                                            <td>@thList.trxID</td>
+                                            <td>@thList.amountTaka</td>
+                                            <td>@thList.medium</td>
+                                            <td>@thList.teacherID</td>
+                                            <td>@thList.phoneNumber</td>
+                                            <td>@thList.status</td>
+                                            <td><input type="text" @bind="thList.inputTrx" class="border border-purple" style="width:100px; padding:1px;margin-top:7px" /></td>
+                                            <td>
+                                                <button style="width:100px;" class="btn btn-outline-purple" @onclick="@( async () => await acceptWithdraw(thList))">Accept</button>
+                                            </td>
 
 
+                                        </tr>
+                                    }
 
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                </tbody>
+
+
+                            </table>
                         </div>
+                        <br />
+                        <hr style="background-color:blueviolet; height:1px;" />
+                        <hr style="background-color: blueviolet; height:1px;" />
+                        <br />
                     </div>
-
-
-
+                    <!--end row -->
 
                 </div>
+                <br />
                 <!-- end container-fluid -->
                 <!-- Footer Start -->
                 <footer class="footer">
@@ -205,7 +189,6 @@
                     </div>
                 </footer>
                 <!-- end Footer -->
-
             </div>
             <!-- end content -->
 
@@ -220,18 +203,22 @@
 </html>
 
 @code{
+    List<TeacherWithdrawHistory> twh = new List<TeacherWithdrawHistory>();
+    TeacherWithdrawHistory TeacherWithdrawHis = new TeacherWithdrawHistory();
 
     public string userName { get; set; }
     public string pass { get; set; }
-    List<Models.Question> objList = new List<Models.Question>();
 
     protected override async Task OnInitializedAsync()
     {
-        await GetQuestion();
+
+        await GetWithdrawHistory();
         await GetLoginInfo();
         userName = await oLocalStore.GetItemAsync<string>("name");
         pass = await oLocalStore.GetItemAsync<string>("passWord");
+
     }
+
     public async Task GetLoginInfo()
     {
         if (userName == "" && pass == "")
@@ -240,6 +227,7 @@
             nvi.NavigateTo(redirectURL);
         }
     }
+
     [Inject]
     public NavigationManager nvi { get; set; }
     public async Task Logout()
@@ -249,10 +237,30 @@
         nvi.NavigateTo(redirectURL);
     }
 
-    public async Task GetQuestion()
+    public async Task acceptWithdraw(TeacherWithdrawHistory teacher)
     {
-        objList = await "https://api.shikkhanobish.com/api/ShikkhanobishLogin/getQuestion".GetJsonAsync<List<Models.Question>>();
-        userName = await oLocalStore.GetItemAsync<string>("name");
+        if (teacher.inputTrx != null || teacher.inputTrx != "")
+        {
+            var withdrawList = await "https://api.shikkhanobish.com/api/ShikkhanobishTeacher/getAllTeacherWithdrawHistory".PostJsonAsync(new
+            {
+                withdrawID = teacher.withdrawID,
+                trxID = teacher.inputTrx,
+                amountTaka = teacher.amountTaka,
+                teacherID = teacher.teacherID,
+                status = teacher.status
 
+            }).ReceiveJson<List<TeacherWithdrawHistory>>();
+        }
+
+        await GetWithdrawHistory();
+    }
+
+    public async Task GetWithdrawHistory()
+    {
+        var withdrawList = await "https://api.shikkhanobish.com/api/ShikkhanobishTeacher/getAllTeacherWithdrawHistory".PostJsonAsync(new { }).ReceiveJson<List<TeacherWithdrawHistory>>();
+        twh = withdrawList;
     }
 }
+
+
+

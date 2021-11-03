@@ -17,6 +17,7 @@ namespace ShikkhanobishBlazor.Models
         public int sub7 { get; set; }
         public int sub8 { get; set; }
         public int sub9 { get; set; }
+        public int sub10 { get; set; }
         public int crs1 { get; set; }
         public int crs2 { get; set; }
         public int crs3 { get; set; }

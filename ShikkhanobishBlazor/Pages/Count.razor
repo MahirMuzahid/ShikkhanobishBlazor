@@ -1,4 +1,5 @@
 ﻿@using Flurl.Http;
+@inject Blazored.LocalStorage.ILocalStorageService oLocalStore
 @using ShikkhanobishBlazor.Models
 @page "/"
 
@@ -21,46 +22,34 @@
 
     <!-- Begin page -->
     <div id="wrapper">
+        <!-- LOGO -->
+            <div class="logo-box mt-2 m-0 ml-0">
+                <a href="Count" class="">
 
+                    <img src="/images/snImg.jpg" style="display: block; margin-left: auto; margin-right: auto; width: 50px;height:50px;">
+
+                </a>
+            </div>
         <!-- Topbar Start -->
         <div class="navbar-custom">
+            
             <ul class="list-unstyled topnav-menu float-right mb-0">
                 <li class="dropdown notification-list">
                     <a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                         <img src="/images/images.png" alt="user-image" class="rounded-circle" />
-                        <span class="pro-user-name ml-1"> Maxine K <i class="mdi mdi-chevron-down"></i> </span>
+                        <span class="pro-user-name ml-1"> @userName <i class="mdi mdi-chevron-down"></i> </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right profile-dropdown">
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item">
                             <i class="mdi mdi-logout-variant"></i>
-                            <span>Logout</span>
+                            <span @onclick="Logout">Logout</span>
                         </a>
                     </div>
                 </li>
             </ul>
 
-            <!-- LOGO -->
-            <div class="logo-box">
-                <a href="Index" class="logo text-center logo-dark">
-                    <span class="logo-lg">
-                        <img src="/images/logo1.png" alt="" height="50" />
-                    </span>
 
-                    <span class="logo-sm">
-                        <img src="/images/logo1.png" alt="" height="22" />
-                    </span>
-                </a>
-
-                <a href="Index" class="logo text-center logo-light">
-                    <span class="logo-lg">
-                        <img src="/images/logo1.png" alt="" height="50" />
-                    </span>
-                    <span class="logo-sm">
-                        <img src="/images/logo1.png" alt="" height="22" />
-                    </span>
-                </a>
-            </div>
 
             <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
                 <li>
@@ -78,7 +67,7 @@
                     <img src="/images/images.png" alt="" class="avatar-md rounded-circle" />
                 </div>
                 <div class="user-info">
-                    <a href="#">Maxine K</a>
+                    <a href="#">@userName</a>
                 </div>
             </div>
 
@@ -86,9 +75,8 @@
             <div id="sidebar-menu">
                 <ul class="metismenu" id="side-menu">
                     <li class="menu-title">Navigation</li>
-
                     <li>
-                        <a href="">
+                        <a href="https://dashboard.shikkhanobish.com/index.html">
                             <i class="fas fa-home"></i>
                             <span> Dashboard </span>
                         </a>
@@ -100,36 +88,33 @@
                         </a>
                     </li>
                     <li>
-                        <a href="Student">
-                            <i class="fas fa-user-graduate"></i>
-                            <span> Student </span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="Teacher">
-                            <i class="fas fa-user"></i>
-                            <span> Teacher </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="Question">
+                        <a href="Questions">
                             <i class="far fa-question-circle"></i>
                             <span> Question </span>
                         </a>
                     </li>
                     <li>
-                        <a href="Voucher">
-                            <i class="fas fa-fill-drip"></i>
-                            <span> Voucher </span>
+                        <a href="TeacherApproval">
+                            <i class="fas fa-user-alt"></i>
+                            <span> Teacher Qn. Approval </span>
                         </a>
                     </li>
-
-
                     <li>
-                        <a href="Add">
-                            <i class="fas fa-plus-square"></i>
-                            <span> Add </span>
+                        <a href="ActiveTeacher">
+                            <i class="fas fa-lightbulb"></i>
+                            <span> Active Teacher </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="TeacherWithdraw">
+                            <i class="fas fa-money-bill-wave-alt"></i>
+                            <span> Teacher Withdraw </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="SendMessage">
+                            <i class="far fa-share-square"></i>
+                            <span> Send Message </span>
                         </a>
                     </li>
                 </ul>
@@ -323,8 +308,6 @@
                                             <div class="text-center p-3">
                                                 <h2 class="mt-2"><i class="fas fa-user text-info mr-2"></i> <b>@countOnlySelected</b></h2>
                                                 <p class="text-muted mb-0">Only Selected Teacher</p>
-
-
                                             </div>
                                         </div>
                                     </div>
@@ -335,11 +318,16 @@
 
                     <!--end row -->
 
+
+
                     <br />
                     <br />
+                    <br />
+                    <br />
+
                     <div class="form-group row">
                         <div class="col-12 align-content-center">
-                            <label style="color:blueviolet;font-size:32px;">Question Section</label>
+                            <label style="color:blueviolet;font-size:30px;">Question Counting section</label>
                         </div>
                     </div>
 
@@ -351,14 +339,14 @@
                                         <div class="col-xl-4 col-sm-4 widget-inline-box">
                                             <div class="text-center p-3">
 
-                                                <h2 class="mt-2"><i class="fas fa-user text-info mr-2"></i> <b>@numQuestion8</b></h2>
+                                                <h2 class="mt-2"><b>@numQuestion8</b></h2>
                                                 <p class="text-muted mb-0">No of Questions from Class 8</p>
                                             </div>
                                         </div>
 
                                         <div class="col-xl-4 col-sm-4 widget-inline-box">
                                             <div class="text-center p-3">
-                                                <h2 class="mt-2"><i class="fas fa-user text-info mr-2"></i> <b>@numQuestion9and10</b></h2>
+                                                <h2 class="mt-2"> <b>@numQuestion9and10</b></h2>
                                                 <p class="text-muted mb-0">No of Questions from Class 9&10</p>
 
 
@@ -366,20 +354,24 @@
                                         </div>
                                         <div class="col-xl-4 col-sm-4 ">
                                             <div class="text-center p-3">
-                                                <h2 class="mt-2"><i class="fas fa-user text-info mr-2"></i> <b>@numQuestion11and12</b></h2>
+                                                <h2 class="mt-2"><b>@numQuestion11and12</b></h2>
                                                 <p class="text-muted mb-0">No of Questions from Class 11&12</p>
 
 
                                             </div>
                                         </div>
-
-
-
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+
+
+                    <br />
+                    <hr style="background-color:blueviolet; height:1px;" />
+                    <hr style="background-color: blueviolet; height:1px;" />
+                    <br />
 
                     <!--end row -->
                     <!-- Group and Class Based Table for Question-->
@@ -411,10 +403,8 @@
                     </div>
 
                     <br />
-                    <hr style="background-color: crimson" />
-                    <hr style="background-color: crimson" />
-                    <hr style="background-color: crimson" />
-
+                    <hr style="background-color:blueviolet; height:1px;" />
+                    <hr style="background-color: blueviolet; height:1px;" />
                     <br />
 
 
@@ -466,22 +456,18 @@
                             <table id="" class="table table-bordered">
                                 <thead>
                                     <tr>
-
+                                        <th>Accounting</th>
                                         <th>Finance</th>
                                         <th>Business Entrepreneurship</th>
                                         <th>General Science</th>
-                                        <th>Accounting</th>
-
-
-
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
+                                        <td>@countClass9and10Accounting</td>
                                         <td>@countClass9and10Finance</td>
                                         <td>@countClass9and10Entre</td>
                                         <td>@countClass9and10Science</td>
-                                        <td>@countClass9and10Accounting</td>
                                     </tr>
                                 </tbody>
 
@@ -500,10 +486,8 @@
                             <table id="" class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>Logic</th>
                                         <th>Economics</th>
-                                        <th>Geography</th>
-                                        <th>Civic</th>
+                                        <th>GeneralScience</th>
                                         <th>IT</th>
 
 
@@ -512,10 +496,8 @@
                                 <tbody>
 
                                     <tr>
-                                        <td>@countClass9and10Logic</td>
                                         <td>@countClass9and10Eco</td>
-                                        <td>@countClass9and10Geo</td>
-                                        <td>@countClass9and10Civic</td>
+                                        <td>@countClass9and10GS2</td>
                                         <td>@countClass9and10IT</td>
                                     </tr>
 
@@ -529,9 +511,8 @@
                     </div>
 
                     <br />
-                    <hr style="background-color:crimson" />
-                    <hr style="background-color: crimson" />
-                    <hr style="background-color: crimson" />
+                    <hr style="background-color:blueviolet; height:1px;" />
+                    <hr style="background-color: blueviolet; height:1px;" />
                     <br />
 
                     <!--11&12 Question by group and class-->
@@ -625,89 +606,12 @@
                             </table>
                         </div>
                     </div>
-
                     <br />
-                    <br />
-                    <div class="row">
-                        <div class="col-12">
-                            <div>
-                                <div class="card-box widget-inline">
-                                    <div class="row">
-                                        <div class="col-xl-3 col-sm-3 widget-inline-box">
-                                            <div class="text-center p-3">
-
-                                                <h2 class="mt-2"> <b>@totalQues</b></h2>
-                                                <p class="text-muted mb-0">Total Question</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xl-3 col-sm-3 widget-inline-box">
-                                            <div class="text-center p-3">
-                                                <h2 class="mt-2"><b>@approvedQues</b></h2>
-                                                <p class="text-muted mb-0">Approved</p>
-
-
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-3 col-sm-3 widget-inline-box">
-                                            <div class="text-center p-3">
-                                                <h2 class="mt-2"><b>@notapprovedQues</b></h2>
-                                                <p class="text-muted mb-0">Not Approved</p>
-
-
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-3 col-sm-3 ">
-                                            <div class="text-center p-3">
-                                                <h2 class="mt-2"><b>@pendingQues</b></h2>
-                                                <p class="text-muted mb-0">Pending</p>
-
-
-                                            </div>
-                                        </div>
-
-
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <br />
+                    <hr style="background-color:blueviolet; height:1px;" />
+                    <hr style="background-color: blueviolet; height:1px;" />
                     <br />
 
-                    <div class="">
-                        <label style="color:blueviolet;font-size:32px;">Approval of Teacher Section </label>
-                    </div>
-                    <div class="row">
-                        <h5 style="color:blueviolet">Question Approval Count</h5>
-                        <div class="table-responsive">
-                            <table id="" class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>TeacherId</th>
-                                        <th>Approved</th>
-                                        <th>NotApproved</th>
-                                        <th>Pending</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @for (int i = 0; i < tqscResult.Count; i++)
-                                    {
-                                        <tr>
-                                            <td>@tqscResult[i].teacherID</td>
-                                            <td>@tqscResult[i].approved</td>
-                                            <td>@tqscResult[i].notApproved</td>
-                                            <td>@tqscResult[i].pending</td>
-                                        </tr>
-                                    }
 
-                                </tbody>
-
-
-                            </table>
-                        </div>
-                    </div>
 
 
                 </div>
@@ -784,11 +688,8 @@
 
 
     int countClass9and10Eco;
+    int countClass9and10GS2;
     int countClass9and10IT;
-
-    int countClass9and10Logic;
-    int countClass9and10Geo;
-    int countClass9and10Civic;
 
 
 
@@ -815,19 +716,16 @@
 
 
 
-    int countApproved;
-    int countNotApproved;
-    int countPending;
-    int teachID;
 
 
-    int totalQues;
-    int approvedQues;
-    int notapprovedQues;
-    int pendingQues;
+    string userName { get; set; }
+    string pass { get; set; }
 
+    List<TeacherWithdrawHistory> twh = new List<TeacherWithdrawHistory>();
 
     List<TeacherQuestionStatusCount> tqscResult = new List<TeacherQuestionStatusCount>();
+
+
 
     protected override async Task OnInitializedAsync()
     {
@@ -841,10 +739,29 @@
         await GetMonetizedTeacher();
         await GetQuestionCountByClass();
         await GetQuestionByGroupAndClass();
-        await GetTeacherQuestionHistory();
-        
+        await GetLoginInfo();
+        userName = await oLocalStore.GetItemAsync<string>("name");
+        pass = await oLocalStore.GetItemAsync<string>("passWord");
     }
 
+    public async Task GetLoginInfo()
+    {
+        if (userName=="" && pass=="")
+        {
+           
+            string redirectURL = "/";
+            nvi.NavigateTo(redirectURL);
+        }
+    }
+
+    [Inject]
+    public NavigationManager nvi { get; set; }
+    public async Task Logout()
+    {
+        await oLocalStore.ClearAsync();
+        string redirectURL = "/";
+        nvi.NavigateTo(redirectURL);
+    }
 
     public async Task<int> GetStudentCount()
     {
@@ -1079,8 +996,7 @@
         int count111 = 0;
         int count222 = 0;
         int count333 = 0;
-        int count444 = 0;
-        int count555 = 0;
+
 
 
 
@@ -1142,34 +1058,25 @@
 
 
                 //Arts
-                if (quesInfoList[i].classID == 101 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 125)
+                if (quesInfoList[i].classID == 101 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 110)
                 {
                     count111++;
                 }
 
 
-                if (quesInfoList[i].classID == 101 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 126)
+                if (quesInfoList[i].classID == 101 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 111)
                 {
                     count222++;
                 }
 
 
-                if (quesInfoList[i].classID == 101 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 127)
+                if (quesInfoList[i].classID == 101 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 112)
                 {
                     count333++;
                 }
 
 
-                if (quesInfoList[i].classID == 101 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 128)
-                {
-                    count444++;
-                }
 
-
-                if (quesInfoList[i].classID == 101 && quesInfoList[i].subjectID == groupInfoList[j].subjectID && groupInfoList[j].subjectID == 112)
-                {
-                    count555++;
-                }
 
 
             }
@@ -1191,11 +1098,10 @@
         countClass9and10Science = count33;
         countClass9and10Accounting = count44;
 
-        countClass9and10Logic = count111;
-        countClass9and10Eco = count222;
-        countClass9and10Geo = count333;
-        countClass9and10Civic = count444;
-        countClass9and10IT = count555;
+        countClass9and10Eco = count111;
+        countClass9and10GS2 = count222;
+        countClass9and10IT = count333;
+
 
 
 
@@ -1309,109 +1215,7 @@
 
 
 
-    public async Task GetTeacherQuestionHistory()
-    {
-        
-        int count1 = 0;
-        int count2 = 0;
-        int count3 = 0;
 
-        var thList = await "https://api.shikkhanobish.com/api/ShikkhanobishLogin/getTeacherQuestionHistory".GetJsonAsync<List<TecaherQuestionHistory>>();
-        var quesList = await "https://api.shikkhanobish.com/api/ShikkhanobishLogin/getQuestion".GetJsonAsync<List<Question>>();
-
-        List<int> teacherIDList = new List<int>();
-        List<int> uniqueTeacherID = new List<int>();
-        List<int> countList = new List<int>();
-
-        for (int i = 0; i < thList.Count; i++)
-        {
-            teacherIDList.Add(thList[i].teacherID);
-        }
-
-        for (int i = 0; i < teacherIDList.Count; i++)
-        {
-            bool isDone = false;
-
-            //check already counted
-            if (uniqueTeacherID.Count != 0)
-            {
-                for (int k = 0; k < uniqueTeacherID.Count; k++)
-                {
-                    if (uniqueTeacherID[k] == teacherIDList[i])
-                    {
-
-                        isDone = true;
-                    }
-                }
-            }
-
-
-
-            if (!isDone)
-            {
-                uniqueTeacherID.Add(teacherIDList[i]);
-                int num = 0;
-                for (int j = 0; j < teacherIDList.Count; j++)
-                {
-                    if (teacherIDList[i] == teacherIDList[j])
-                    {
-                        num++;
-                    }
-
-                }
-                countList.Add(num);
-
-
-            }
-
-        }
-        List<TeacherQuestionStatusCount> tqsc = new List<TeacherQuestionStatusCount>();
-        for (int i = 0; i < uniqueTeacherID.Count; i++)
-        {
-            TeacherQuestionStatusCount newtqsc = new TeacherQuestionStatusCount();
-            for (int j = 0; j < thList.Count; j++)
-            {
-                if (uniqueTeacherID[i]==thList[j].teacherID)
-                {
-                    newtqsc.teacherID = uniqueTeacherID[i];
-                    for (int k = 0; k < quesList.Count; k++)
-                    {
-                        if(thList[j].questionID == quesList[k].questionID)
-                        {
-                            if(quesList[k].review == 0)
-                            {
-                                newtqsc.pending++;
-                            }
-                            if (quesList[k].review == 1)
-                            {
-                                newtqsc.approved++;
-                            }
-                            if (quesList[k].review == 2)
-                            {
-                                newtqsc.notApproved++;
-                            }
-                            break;
-                        }
-                    }
-                }
-            }
-            tqsc.Add(newtqsc);
-        }
-        countApproved = count1;
-        tqscResult = tqsc;
-        for (int i = 0; i < tqsc.Count; i++)
-        {
-            count1 += tqsc[i].approved;
-            count2 += tqsc[i].notApproved;
-            count3 += tqsc[i].pending;
-        }
-        approvedQues = count1;
-        notapprovedQues = count2;
-        pendingQues = count3;
-        totalQues = count1 + count2 + count3;
-    }
-
-    
 }
 
 

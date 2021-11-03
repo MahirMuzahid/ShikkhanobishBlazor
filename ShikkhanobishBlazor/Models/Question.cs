@@ -22,5 +22,12 @@ namespace ShikkhanobishBlazor.Models
         public int review { get; set; }
         public string quesImages { get; set; }
         public string Response { get; set; }
+        public string appBackColor { get; set; }
+        public string decBackColor { get;set; }
+        public string option1Color { get; set; }
+        public string option2Color { get; set; }
+        public string option3Color { get; set; }
+        public string option4Color { get; set; }
+      
     }
 }
